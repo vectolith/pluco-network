@@ -42,7 +42,6 @@ contract VectolithOriginals is ERC721, ERC721URIStorage, ERC2981, Ownable, Reent
     error BadSupply();
     error FeeTooHigh();
     error FeeTransferFailed();
-    error ZeroAddress();
 
     constructor(
         string memory name_,
@@ -56,8 +55,7 @@ contract VectolithOriginals is ERC721, ERC721URIStorage, ERC2981, Ownable, Reent
         uint96 feeBps_
     ) ERC721(name_, symbol_) Ownable(owner_) {
         if (maxSupply_ == 0) revert BadSupply();
-        if (royaltyReceiver_ == address(0) || treasury_ == address(0)) revert ZeroAddress();
-        if (feeBps_ > 1_000) revert FeeTooHigh();
+        if (feeBps_ > 1_000) revert BadSupply();
         treasury = treasury_;
         feeBps = feeBps_;
         maxSupply = maxSupply_;
@@ -108,12 +106,10 @@ contract VectolithOriginals is ERC721, ERC721URIStorage, ERC2981, Ownable, Reent
     }
 
     function setDefaultRoyalty(address receiver, uint96 feeNumerator) external onlyOwner {
-        if (receiver == address(0)) revert ZeroAddress();
         _setDefaultRoyalty(receiver, feeNumerator);
     }
 
     function setTreasury(address treasury_) external onlyOwner {
-        if (treasury_ == address(0)) revert ZeroAddress();
         treasury = treasury_;
         emit TreasurySet(treasury_);
     }
@@ -126,7 +122,6 @@ contract VectolithOriginals is ERC721, ERC721URIStorage, ERC2981, Ownable, Reent
     }
 
     function withdraw(address payable to) external onlyOwner nonReentrant {
-        if (to == address(0)) revert ZeroAddress();
         (bool ok, ) = to.call{value: address(this).balance}("");
         require(ok, "withdraw failed");
     }

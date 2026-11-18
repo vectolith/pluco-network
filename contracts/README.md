@@ -1,7 +1,7 @@
 # VECTOLITH Art Protocol
 
-Open art protocol for VECTOLITH, deployed on Base. Art is the first thing to run on the
-network, not the whole product: the chain, wallet and indexer come next.
+Open art protocol for Vectolith, designed for Base. Art is the first product surface;
+the wider network, wallet and indexer are separate roadmap components. The deployment manifest is stored at `art/deployments/base.json`. CI now verifies its Base mainnet transaction receipts, deployed bytecode, ownership and treasury state, fee settings, supply, mint price, registry status and EIP-2981 royalty configuration through the public Base RPC. The last recorded verification run (44292740465) reported that all three deployed executable runtimes matched the normalized Foundry artifacts after compiler metadata and constructor immutable slots were accounted for. The current CI workflow rechecks this after every contract-related change.  the immutable supply, mint price and max-per-wallet values are read from chain and checked against the manifest. An internal pre-audit review is recorded in [`docs/SECURITY_REVIEW_NOTES.md`](../docs/SECURITY_REVIEW_NOTES.md); it identifies sale-availability, NFT delivery, admin configuration and collection-attribution risks for remediation or explicit acceptance in a future deployment. It is not an independent audit. Explorer verified-source status and an independent contract security review remain outstanding.
 
 ## Contracts (`src/`)
 
@@ -23,14 +23,15 @@ Compiler: solc 0.8.26, evmVersion cancun, optimizer 200 runs.
 
 ## Deploy
 
-Base mainnet only (chain 8453). There is no testnet target in these scripts:
+Base mainnet only (chain 8453). There is no testnet target in these scripts. This is
+a deployment procedure. The manifest records a claimed deployment; verify its transactions and deployed state independently before relying on it:
 
 ```bash
 PRIVATE_KEY=0x... node deploy-protocol.mjs --fee 250
 ```
 
-Mainnet gas is real ETH. Read the addresses the script prints back, then set them on the
-site before minting anything.
+Mainnet gas is real ETH. After deployment, verify the transaction and deployed bytecode,
+record the deployer and owner/admin roles, then set the verified addresses on the site.
 
 Fees are native ETH on Base and go to the treasury, which defaults to
 `0xcaEC37D3AdcE9a141BF5d78895cb3074Fae77AD9` in both deploy scripts. Set `TREASURY=0x...`
@@ -46,8 +47,19 @@ The scripts print the addresses to set on the site:
 `NEXT_PUBLIC_VECTOLITH_REGISTRY`, `NEXT_PUBLIC_VECTOLITH_MARKETPLACE`,
 `NEXT_PUBLIC_VECTOLITH_ART_CONTRACT`, `NEXT_PUBLIC_VECTOLITH_CHAIN_ID`.
 
+## Verify the declared Base deployment
+
+Run `bash scripts/verify-base-deployment.sh` from this directory. The script uses the public Base RPC (`https://mainnet.base.org`) without an API key. It checks the eight manifest transactions, expected contract addresses, non-empty deployed bytecode, owner and treasury roles, marketplace registry, configured fees, supply, mint price, active collection registration, mint/list state and the EIP-2981 royalty receiver/rate. The GitHub Actions contract workflow runs this after the Foundry test suite.
+
+These checks confirm current chain state against the manifest. They do not prove that deployed bytecode matches this repository's exact source commit/compiler output, and they are not a substitute for an independent security audit.
+
 ## Why Base and not VECTOLITH chain yet
 
 VECTOLITH will be its own OP Stack L2, settling to Ethereum on the same spec Base uses.
 Until it has wallets, liquidity and an indexer, art minted there would be invisible.
 Base gives distribution today and the contracts are portable to VECTOLITH later, unchanged.
+
+
+## Immutable V1 and successor contracts
+
+The Base V1 contracts are deployed and immutable. Keep their source and manifest aligned with the verified deployment. Do not patch V1 source in place to simulate a live upgrade. Any security remediation or feature change must be introduced as a separately named successor contract with its own tests, deployment plan, migration controls and explicit release approval. The proposed V2 contracts are separate, not deployed, and must not be represented as active until independently verified.

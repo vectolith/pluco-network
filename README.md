@@ -4,11 +4,13 @@
 [![Deploy](https://github.com/vectolith/pluco-network/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/vectolith/pluco-network/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-**Live:** https://ganiyucall911.github.io/vectolith/
+**Live:** Not independently verified. The deployment workflow publishes the static site to this repository's own `gh-pages` branch.
 
 VECTOLITH is an open art market on Base: anyone can register a collection, mint a piece or buy one. This repository is the marketing site and product surface built with Next.js 16 (App Router), React 19, Tailwind CSS 4 and Framer Motion, exported as a fully static site.
 
-## Base contract configuration — deployment verification pending
+PLUCO Network is a Vectolith product and a standalone protocol and marketplace. It owns its website, smart contracts, deployment configuration, treasury and registry controls, and release lifecycle. It does not require VaultETH, Velnor, Blud, Models by Vectolith or any other Vectolith product. Wallet connections and marketplace integrations remain optional and use supported external standards.
+
+## Base contract configuration — chain-state and runtime-bytecode verification passed; source review pending
 
 The site configuration targets Base mainnet (chain ID 8453) and currently contains
 these contract addresses:
@@ -19,20 +21,19 @@ these contract addresses:
 | VectolithOriginals | `0x1f49c091da217f73493a5b517f490865dbabe15d` |
 | VectolithMarketplace | `0x0bbdc74bd7144a32f29196753fd7727995df8e3c` |
 
-These are configuration values, not deployment proof. The previous deployment
-claim cannot currently be reconciled with the later statement in this README
-that no Vectolith contracts are deployed. The referenced
-`contracts/deployments/base.json` file is not present at that path in the
-repository, and independent chain verification was unavailable during this
-review. Therefore this README does not currently assert that these addresses
-contain the expected contracts, that source is verified, or that ownership and
-treasury roles match the intended configuration.
+The repository includes a deployment manifest at
+`contracts/art/deployments/base.json`. It records Base mainnet (chain ID 8453),
+the same three addresses shown above, an owner/treasury/royalty receiver, and
+transaction hashes for deployment, registration, minting, listing, purchase and
+withdrawal. The manifest is repository-supplied evidence. The Foundry CI workflow now independently checks all eight transaction receipts, verifies the three expected contract addresses and non-empty deployed bytecode, and reads current owner/treasury roles, marketplace registry, fee settings, supply, mint price, active registration and EIP-2981 royalty state from the public Base RPC. See [the passing contract verification run](https://github.com/vectolith/pluco-network/actions/runs/44292740465).
 
-Before describing the contracts as live, add the canonical deployment evidence:
-chain ID, address, deployment transaction hash, deployer, owner/admin and
-treasury addresses read from chain, source commit, compiler settings, verified
-source status, and deployed-bytecode match. Keep testnet, local-EVM and mainnet
-evidence distinct.
+The earlier reference to `contracts/deployments/base.json` was a path error;
+the actual manifest is under `contracts/art/deployments/base.json`. The
+repository also contains contradictory historical deployment statements, so
+the current status is **deployment declared; chain-state and normalized runtime-bytecode checks passed on workflow run 44292740465**. Explorer verified-source status and an independent contract security review remain pending. This README does not yet claim verified source, deployed-bytecode
+match, or current owner/treasury role confirmation.
+
+Before treating the deployment as fully verified, obtain verified-source status from the explorer and complete an independent contract security review. Keep testnet, local-EVM and mainnet evidence distinct.
 
 `public/config.json` currently points the frontend at the configured addresses.
 That setting alone does not establish that live contract reads are valid.
@@ -47,8 +48,12 @@ cd contracts && forge test
 
 They cover registration and impersonation rules, the 7.5% royalty and 2.5% fee split,
 non-custodial sale re-checks, pull-payment withdrawals, fee caps, and a fuzz test that
-the sale split always sums to the price. CI does not run them yet, see
+the sale split always sums to the price. CI runs the Foundry suite and the public-RPC deployment verification; see
 `docs/contracts-ci.md`.
+
+## Deployed V1 and successor proposals
+
+The configured Base contracts are the immutable V1 deployment. Keep the V1 source and deployment manifest aligned with the verified on-chain runtime; do not edit deployed V1 source in place. Security hardening and feature changes belong in separately versioned successor contracts. V2 marketplace and originals proposals are maintained separately and are not deployed or enabled by this repository's current frontend configuration.
 
 ## Project structure
 
@@ -74,7 +79,7 @@ Foundry is the canonical way to compile, test and deploy; the node scripts in
 - Editorial pages: collections, creators, marketplace, explore, mint, sell, protocol, verification, dashboard, community, brand, about, contact, legal
 - SEO: per-page titles, Open Graph and Twitter metadata, canonical URLs, `sitemap.xml` and `robots.txt`
 
-Wallet connection is read-only: it reports the address, network and balance. The frontend does not currently provide verified evidence that the configured Vectolith contracts are deployed or that this site can settle transfers.
+Wallet connection is read-only: it reports the address, network and balance. The frontend uses the addresses in `public/config.json`, but its wallet connection remains read-only; the presence of a deployment manifest does not establish that the frontend can settle transfers.
 
 ## Requirements
 
