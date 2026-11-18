@@ -153,7 +153,7 @@ expected_mint_price="$(cast to-wei "$(manifest_value '.settings.mintPriceEth')" 
   exit 1
 }
 
-royalty_info="$(cast call "$originals" "royaltyInfo(uint256,uint256)(address,uint256)" 1 10_000 --rpc-url "$BASE_RPC_URL")"
+royalty_info="$(cast call "$originals" "royaltyInfo(uint256,uint256)(address,uint256)" 1 10000 --rpc-url "$BASE_RPC_URL")"
 if ! grep -qi "$royalty_receiver" <<<"$royalty_info"; then
   echo "EIP-2981 royalty receiver mismatch: expected $royalty_receiver, received $royalty_info" >&2
   exit 1
