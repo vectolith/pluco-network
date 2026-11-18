@@ -19,20 +19,25 @@ these contract addresses:
 | VectolithOriginals | `0x1f49c091da217f73493a5b517f490865dbabe15d` |
 | VectolithMarketplace | `0x0bbdc74bd7144a32f29196753fd7727995df8e3c` |
 
-These are configuration values, not deployment proof. The previous deployment
-claim cannot currently be reconciled with the later statement in this README
-that no Vectolith contracts are deployed. The referenced
-`contracts/deployments/base.json` file is not present at that path in the
-repository, and independent chain verification was unavailable during this
-review. Therefore this README does not currently assert that these addresses
-contain the expected contracts, that source is verified, or that ownership and
-treasury roles match the intended configuration.
+The repository includes a deployment manifest at
+`contracts/art/deployments/base.json`. It records Base mainnet (chain ID 8453),
+the same three addresses shown above, an owner/treasury/royalty receiver, and
+transaction hashes for deployment, registration, minting, listing, purchase and
+withdrawal. The manifest is repository-supplied deployment evidence; it is not
+independent confirmation that each transaction succeeded or that current
+on-chain code and roles still match the manifest.
 
-Before describing the contracts as live, add the canonical deployment evidence:
-chain ID, address, deployment transaction hash, deployer, owner/admin and
-treasury addresses read from chain, source commit, compiler settings, verified
-source status, and deployed-bytecode match. Keep testnet, local-EVM and mainnet
-evidence distinct.
+The earlier reference to `contracts/deployments/base.json` was a path error;
+the actual manifest is under `contracts/art/deployments/base.json`. The
+repository also contains contradictory historical deployment statements, so
+the current status is **deployment declared; independent chain verification
+pending**. This README does not yet claim verified source, deployed-bytecode
+match, or current owner/treasury role confirmation.
+
+Before treating the deployment as verified, confirm each manifest transaction
+on Base, read deployed bytecode and owner/admin/treasury roles from chain, match
+the bytecode to the exact source commit and compiler settings, and record
+verified-source status. Keep testnet, local-EVM and mainnet evidence distinct.
 
 `public/config.json` currently points the frontend at the configured addresses.
 That setting alone does not establish that live contract reads are valid.
@@ -74,7 +79,7 @@ Foundry is the canonical way to compile, test and deploy; the node scripts in
 - Editorial pages: collections, creators, marketplace, explore, mint, sell, protocol, verification, dashboard, community, brand, about, contact, legal
 - SEO: per-page titles, Open Graph and Twitter metadata, canonical URLs, `sitemap.xml` and `robots.txt`
 
-Wallet connection is read-only: it reports the address, network and balance. The frontend does not currently provide verified evidence that the configured Vectolith contracts are deployed or that this site can settle transfers.
+Wallet connection is read-only: it reports the address, network and balance. The frontend uses the addresses in `public/config.json`, but its wallet connection remains read-only; the presence of a deployment manifest does not establish that the frontend can settle transfers.
 
 ## Requirements
 
