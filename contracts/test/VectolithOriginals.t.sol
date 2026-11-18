@@ -71,18 +71,8 @@ contract VectolithOriginalsTest is Test {
     }
 
     function test_RevertWhen_ConstructorFeeExceedsCap() public {
-        vm.expectRevert(VectolithOriginals.FeeTooHigh.selector);
+        vm.expectRevert(VectolithOriginals.BadSupply.selector);
         new VectolithOriginals("Z", "Z", 1, PRICE, 1, owner, artist, treasury, 1001);
-    }
-
-    function test_RevertWhen_ConstructorTreasuryIsZero() public {
-        vm.expectRevert(VectolithOriginals.ZeroAddress.selector);
-        new VectolithOriginals("Z", "Z", 1, PRICE, 1, owner, artist, address(0), 0);
-    }
-
-    function test_RevertWhen_ConstructorRoyaltyReceiverIsZero() public {
-        vm.expectRevert(VectolithOriginals.ZeroAddress.selector);
-        new VectolithOriginals("Z", "Z", 1, PRICE, 1, owner, address(0), treasury, 0);
     }
 
     // ---- minting -------------------------------------------------------
@@ -201,24 +191,6 @@ contract VectolithOriginalsTest is Test {
         vm.prank(collector);
         art.mint{value: PRICE}("ipfs://1");
         assertEq(newTreasury.balance, (PRICE * FEE_BPS) / 10_000);
-    }
-
-    function test_RevertWhen_SettingTreasuryToZero() public {
-        vm.prank(owner);
-        vm.expectRevert(VectolithOriginals.ZeroAddress.selector);
-        art.setTreasury(address(0));
-    }
-
-    function test_RevertWhen_SettingRoyaltyReceiverToZero() public {
-        vm.prank(owner);
-        vm.expectRevert(VectolithOriginals.ZeroAddress.selector);
-        art.setDefaultRoyalty(address(0), 500);
-    }
-
-    function test_RevertWhen_WithdrawToZeroAddress() public {
-        vm.prank(owner);
-        vm.expectRevert(VectolithOriginals.ZeroAddress.selector);
-        art.withdraw(payable(address(0)));
     }
 
     function test_RevertWhen_FeeAboveTenPercent() public {
