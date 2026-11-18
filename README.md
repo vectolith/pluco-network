@@ -4,9 +4,9 @@
 [![Deploy](https://github.com/vectolith/pluco-network/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/vectolith/pluco-network/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-**Live:** https://ganiyucall911.github.io/vectolith/
+**Live:** Not independently verified. This repository's deployment workflow publishes the static site to this repository's own `gh-pages` branch.
 
-VECTOLITH is an open art market on Base: anyone can register a collection, mint a piece or buy one. This repository is the marketing site and product surface built with Next.js 16 (App Router), React 19, Tailwind CSS 4 and Framer Motion, exported as a fully static site.
+PLUCO Network is an open art market on Base: anyone can register a collection, mint a piece or buy one. This repository contains its own marketing site and product surface, built with Next.js 16 (App Router), React 19, Tailwind CSS 4 and Framer Motion, and exported as a fully static site.
 
 PLUCO Network is a standalone protocol and marketplace product. It owns its website, smart contracts, deployment configuration and release lifecycle. It does not require VaultETH or another Vectolith product; wallet access uses supported external wallet standards and remains user-selectable.
 
