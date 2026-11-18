@@ -40,7 +40,7 @@ That setting alone does not establish that live contract reads are valid.
 
 ## Tests
 
-65 Foundry tests across the registry, originals and marketplace contracts:
+91 Foundry tests: 65 tests for the deployed V1 registry/originals/marketplace behavior and 26 adversarial tests for the separate V2 successor proposals:
 
 ```bash
 cd contracts && forge test
@@ -53,7 +53,7 @@ the sale split always sums to the price. CI runs the Foundry suite and the publi
 
 ## Deployed V1 and successor proposals
 
-The configured Base contracts are the immutable V1 deployment. Keep the V1 source and deployment manifest aligned with the verified on-chain runtime; do not edit deployed V1 source in place. Security hardening and feature changes belong in separately versioned successor contracts. V2 marketplace and originals proposals are maintained separately and are not deployed or enabled by this repository's current frontend configuration.
+The configured Base contracts are the immutable V1 deployment. Keep the V1 source and deployment manifest aligned with the verified on-chain runtime; do not edit deployed V1 source in place. Security hardening and feature changes belong in separately versioned successor contracts. V2 marketplace and originals proposals are maintained separately and are not deployed or enabled by this repository's current frontend configuration. The V2 suite adds 10 marketplace cases and 16 originals cases for royalty/fee boundaries, malformed royalty interfaces, safe NFT delivery, zero-address controls, pull-payment accounting and provenance immutability.
 
 ## Project structure
 
