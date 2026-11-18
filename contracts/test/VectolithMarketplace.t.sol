@@ -119,7 +119,7 @@ contract VectolithMarketplaceTest is Test {
     }
 
     function test_HostileRoyaltyCannotConsumeTheProtocolFeeOrRevertSettlement() public {
-        vm.prank(admin);
+        vm.prank(artist);
         art.setDefaultRoyalty(artist, 10_000);
         vm.prank(seller);
         uint256 id = market.list(address(art), 1, LIST_PRICE);
