@@ -110,7 +110,7 @@ contract VectolithOriginalsV2Test is Test {
     function test_RevertWhen_WalletExceedsMintLimit() public {
         vm.startPrank(buyer);
         collection.mint{value: PRICE}("ipfs://piece-1");
-        vm.expectRevert(VectolithOriginalsV2.WalletLimit.selector);
+        vm.expectRevert(abi.encodeWithSelector(VectolithOriginalsV2.WalletLimit.selector, 1));
         collection.mint{value: PRICE}("ipfs://piece-2");
         vm.stopPrank();
     }
