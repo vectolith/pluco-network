@@ -58,3 +58,7 @@ These checks confirm current chain state against the manifest. They do not prove
 VECTOLITH will be its own OP Stack L2, settling to Ethereum on the same spec Base uses.
 Until it has wallets, liquidity and an indexer, art minted there would be invisible.
 Base gives distribution today and the contracts are portable to VECTOLITH later, unchanged.
+
+## Marketplace V2 security proposal
+
+`src/VectolithMarketplaceV2.sol` is a separately deployable successor proposal with adversarial regression tests. It is not deployed, is not referenced by the production frontend, and does not alter the immutable Base V1 marketplace. See [`docs/marketplace-v2-security-hardening.md`](../docs/marketplace-v2-security-hardening.md) for the V1 findings, V2 behavior, test scope and mandatory deployment gates. Do not deploy V2 until independent specialist review and a deliberate listing/registry migration plan are complete.
