@@ -151,6 +151,7 @@ mint_price="$(cast call "$originals" "mintPrice()(uint256)" --rpc-url "$BASE_RPC
 expected_marketplace_fee="$(manifest_value '.settings.marketplaceFeeBps')"
 expected_mint_fee="$(manifest_value '.settings.mintFeeBps')"
 expected_max_supply="$(manifest_value '.settings.maxSupply')"
+expected_max_per_wallet="$(manifest_value '.settings.maxPerWallet')"
 expected_mint_price="$(cast to-wei "$(manifest_value '.settings.mintPriceEth')" ether)"
 
 [[ "$marketplace_fee" == "$expected_marketplace_fee" ]] || {
@@ -169,7 +170,10 @@ if (( max_per_wallet < 1 || max_per_wallet > max_supply )); then
   echo "Invalid maximum-per-wallet setting: $max_per_wallet (max supply: $max_supply)" >&2
   exit 1
 fi
-echo "Observed maxPerWallet: $max_per_wallet"
+[[ "$max_per_wallet" == "$expected_max_per_wallet" ]] || {
+  echo "Maximum-per-wallet mismatch: expected $expected_max_per_wallet, received $max_per_wallet" >&2
+  exit 1
+}
 [[ "$mint_price" == "$expected_mint_price" ]] || {
   echo "Mint price mismatch: expected $expected_mint_price, received $mint_price" >&2
   exit 1
@@ -201,5 +205,5 @@ listing_count="$(cast call "$marketplace" "listingCount()(uint256)" --rpc-url "$
   exit 1
 }
 
-echo "Base deployment transaction, bytecode, ownership, treasury, fee, supply, mint, registry and royalty checks passed."
+echo "Base transactions, executable runtime bytecode, ownership, treasury, fee, supply, mint, registry and royalty checks passed."
 echo "Explorer source verification and an independent contract security review remain separate requirements."
