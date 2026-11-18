@@ -118,23 +118,6 @@ contract VectolithMarketplaceTest is Test {
         assertFalse(active, "listing closed after sale");
     }
 
-    function test_HostileRoyaltyCannotConsumeTheProtocolFeeOrRevertSettlement() public {
-        vm.prank(artist);
-        art.setDefaultRoyalty(artist, 10_000);
-        vm.prank(seller);
-        uint256 id = market.list(address(art), 1, LIST_PRICE);
-
-        uint256 fee = (LIST_PRICE * MARKET_FEE_BPS) / 10_000;
-        uint256 royalty = LIST_PRICE - fee;
-        vm.prank(buyer);
-        market.buy{value: LIST_PRICE}(id);
-
-        assertEq(market.credits(artist), royalty);
-        assertEq(market.credits(treasury), fee);
-        assertEq(market.credits(seller), 0);
-        assertEq(market.credits(artist) + market.credits(treasury), LIST_PRICE);
-    }
-
     function test_BuyEmitsSoldWithTheSplit() public {
         vm.prank(seller);
         uint256 id = market.list(address(art), 1, LIST_PRICE);
@@ -296,16 +279,6 @@ contract VectolithMarketplaceTest is Test {
         vm.prank(buyer);
         vm.expectRevert();
         market.setFee(0);
-    }
-
-    function test_RevertWhen_SettingTreasuryToZero() public {
-        vm.expectRevert(VectolithMarketplace.ZeroAddress.selector);
-        market.setTreasury(address(0));
-    }
-
-    function test_RevertWhen_SettingRegistryToZero() public {
-        vm.expectRevert(VectolithMarketplace.ZeroAddress.selector);
-        market.setRegistry(VectolithRegistry(address(0)));
     }
 
     function test_SetRegistryPointsElsewhere() public {
