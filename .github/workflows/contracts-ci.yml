@@ -6,6 +6,7 @@ on:
     paths:
       - "contracts/**"
       - ".github/workflows/contracts-ci.yml"
+      - "docs/SECURITY_REVIEW_NOTES.md"
   pull_request:
     paths:
       - "contracts/**"
@@ -21,7 +22,7 @@ concurrency:
 jobs:
   foundry:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,4 +35,15 @@ jobs:
         run: forge build
       - name: Run registry, originals, and marketplace tests
         working-directory: contracts
-        run: forge test -vvv
+        run: forge test --gas-report
+      - name: Validate deployment verifier syntax
+        working-directory: contracts
+        run: bash -n scripts/verify-base-deployment.sh
+      - name: Validate runtime verifier syntax
+        working-directory: contracts
+        run: python3 -m py_compile scripts/verify-runtime-bytecode.py
+      - name: Verify declared Base deployment through public RPC
+        working-directory: contracts
+        env:
+          BASE_RPC_URL: https://mainnet.base.org
+        run: bash scripts/verify-base-deployment.sh
