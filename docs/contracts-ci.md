@@ -40,3 +40,6 @@ The Foundry suite currently contains 91 tests: 65 V1 regression tests and 26
 adversarial V2 successor tests. The latest recorded successful Base RPC
 verification is
 [run 44363495200](https://github.com/vectolith/pluco-network/actions/runs/44363495200).
+
+
+The Foundry test command includes both the 65 V1 regression tests and the 26 V2 successor tests. The Base RPC verifier remains scoped to the immutable V1 addresses and artifacts; it does not claim that V2 is deployed. The workflow must continue to fail if a V1 source change makes its normalized runtime diverge from Base.
