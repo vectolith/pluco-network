@@ -51,7 +51,7 @@ The scripts print the addresses to set on the site:
 
 Run `bash scripts/verify-base-deployment.sh` from this directory. The script uses the public Base RPC (`https://mainnet.base.org`) without an API key. It checks the eight manifest transactions, expected contract addresses, non-empty deployed bytecode, owner and treasury roles, marketplace registry, configured fees, supply, mint price, active collection registration, mint/list state and the EIP-2981 royalty receiver/rate. The GitHub Actions contract workflow runs this after the Foundry test suite.
 
-These checks confirm current chain state against the manifest. They do not prove that deployed bytecode matches this repository's exact source commit/compiler output, and they are not a substitute for an independent security audit.
+These checks confirm current chain state against the manifest and compare deployed executable runtime logic with the current Foundry artifacts after compiler metadata and constructor immutables are normalized. They do not establish explorer verified-source status or replace an independent security audit.
 
 ## Why Base and not VECTOLITH chain yet
 
