@@ -1,0 +1,37 @@
+name: VECTOLITH contract verification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "contracts/**"
+      - ".github/workflows/contracts-ci.yml"
+  pull_request:
+    paths:
+      - "contracts/**"
+      - ".github/workflows/contracts-ci.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vectolith-contracts-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  foundry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - name: Verify Solidity compilation
+        working-directory: contracts
+        run: forge build
+      - name: Run registry, originals, and marketplace tests
+        working-directory: contracts
+        run: forge test -vvv

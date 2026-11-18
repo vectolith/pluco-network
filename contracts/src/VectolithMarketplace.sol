@@ -54,6 +54,7 @@ contract VectolithMarketplace is Ownable, ReentrancyGuard {
     error TransferFailed();
     error FeeTooHigh();
     error NothingToWithdraw();
+    error ZeroAddress();
 
     constructor(address owner_, VectolithRegistry registry_, address treasury_, uint96 feeBps_) Ownable(owner_) {
         if (address(registry_) == address(0) || treasury_ == address(0)) revert NotRegistered();
@@ -120,11 +121,14 @@ contract VectolithMarketplace is Ownable, ReentrancyGuard {
         address royaltyReceiver;
         if (IERC165Check.supportsRoyalty(collection)) {
             (royaltyReceiver, royalty) = IERC2981(collection).royaltyInfo(tokenId, price);
-            if (royalty > price) royalty = price;
             if (royaltyReceiver == address(0)) royalty = 0;
         }
 
         uint256 fee = (price * feeBps) / 10_000;
+        // EIP-2981 royaltyInfo is supplied by an external collection. Cap the
+        // returned royalty after reserving the protocol fee so malformed or
+        // hostile royalty values cannot make settlement underflow and revert.
+        if (royalty > price - fee) royalty = price - fee;
         uint256 sellerProceeds = price - royalty - fee;
 
         _close(listingId);
@@ -148,11 +152,13 @@ contract VectolithMarketplace is Ownable, ReentrancyGuard {
     }
 
     function setRegistry(VectolithRegistry registry_) external onlyOwner {
+        if (address(registry_) == address(0)) revert ZeroAddress();
         registry = registry_;
         emit RegistrySet(address(registry_));
     }
 
     function setTreasury(address treasury_) external onlyOwner {
+        if (treasury_ == address(0)) revert ZeroAddress();
         treasury = treasury_;
         emit TreasurySet(treasury_);
     }
