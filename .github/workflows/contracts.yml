@@ -2,7 +2,7 @@ name: Contract tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, feat/marketplace-v2-security-hardening-stacked]
     paths:
       - "contracts/**"
       - ".github/workflows/contracts.yml"
