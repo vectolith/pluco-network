@@ -15,7 +15,8 @@
     "royaltyBps": 750,
     "mintFeeBps": 250,
     "maxSupply": 10,
-    "mintPriceEth": "0.0005"
+    "mintPriceEth": "0.0005",
+    "maxPerWallet": 3
   },
   "transactions": {
     "deployRegistry": "0x8e4a2a3b8ba48342e279a612448c17649f4c82848992d7c57302084adeddeb07",
