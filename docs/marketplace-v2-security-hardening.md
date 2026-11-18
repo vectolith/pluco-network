@@ -21,6 +21,7 @@ The internal pre-audit review identified the following issues in `VectolithMarke
 - Treat a failed or malformed ERC-165 royalty capability response as an error. If the collection advertises EIP-2981, a failed or malformed `royaltyInfo` response reverts the sale. This is an explicit fail-closed availability trade-off rather than silently dropping an artist royalty.
 - Treat a zero royalty receiver as no payable royalty.
 - Use `safeTransferFrom`; a contract buyer must implement `IERC721Receiver` or the purchase reverts atomically.
+- Re-check registry activity at purchase time so an emergency delist also blocks already-created listings.
 - Reject zero registry and treasury addresses in both the constructor and owner setters.
 - Keep pull-payment withdrawals and `nonReentrant` guards.
 - Use full-precision `Math.mulDiv` for the protocol fee calculation.
@@ -33,6 +34,7 @@ The internal pre-audit review identified the following issues in `VectolithMarke
 - zero royalty receiver;
 - malformed ERC-165 boolean responses;
 - malformed and reverting EIP-2981 responses;
+- emergency delisting of previously created listings;
 - zero-address registry and treasury setters;
 - non-receiver contract buyers;
 - normal settlement conservation.
