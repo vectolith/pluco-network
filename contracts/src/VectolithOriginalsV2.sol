@@ -22,6 +22,7 @@ contract VectolithOriginalsV2 is ERC721, ERC721URIStorage, ERC2981, Ownable, Ree
     uint256 public immutable maxPerWallet;
 
     uint256 public totalMinted;
+    uint256 public proceedsBalance;
     bool public saleOpen;
     string public provenance;
     bool public provenanceFrozen;
@@ -39,6 +40,7 @@ contract VectolithOriginalsV2 is ERC721, ERC721URIStorage, ERC2981, Ownable, Ree
     event TreasurySet(address treasury);
     event FeeSet(uint96 feeBps);
     event Withdrawn(address indexed account, uint256 amount);
+    event ProceedsWithdrawn(address indexed recipient, uint256 amount);
 
     error ZeroAddress();
     error SaleClosed();
@@ -92,6 +94,7 @@ contract VectolithOriginalsV2 is ERC721, ERC721URIStorage, ERC2981, Ownable, Ree
             credits[treasury] += fee;
             emit FeeAccrued(treasury, fee);
         }
+        proceedsBalance += mintPrice - fee;
     }
 
     function ownerMint(address to, string calldata uri) external onlyOwner returns (uint256 tokenId) {
@@ -141,6 +144,17 @@ contract VectolithOriginalsV2 is ERC721, ERC721URIStorage, ERC2981, Ownable, Ree
         (bool ok, ) = payable(msg.sender).call{value: amount}("");
         if (!ok) revert TransferFailed();
         emit Withdrawn(msg.sender, amount);
+    }
+
+    function withdrawProceeds(address payable recipient) external onlyOwner nonReentrant {
+        if (recipient == address(0)) revert ZeroAddress();
+        uint256 amount = proceedsBalance;
+        if (amount == 0) revert NothingToWithdraw();
+
+        proceedsBalance = 0;
+        (bool ok, ) = recipient.call{value: amount}("");
+        if (!ok) revert TransferFailed();
+        emit ProceedsWithdrawn(recipient, amount);
     }
 
     function tokenURI(uint256 tokenId)
