@@ -54,6 +54,7 @@ contract VectolithOriginalsV2Test is Test {
 
         assertEq(target.ownerOf(1), buyer);
         assertEq(target.credits(address(rejectingTreasury)), 0.025 ether);
+        assertEq(target.proceedsBalance(), 0.975 ether);
         assertEq(address(rejectingTreasury).balance, 0);
     }
 
@@ -126,6 +127,45 @@ contract VectolithOriginalsV2Test is Test {
     function test_RevertWhen_EmptyProvenanceIsCommitted() public {
         vm.expectRevert(VectolithOriginalsV2.EmptyProvenance.selector);
         collection.setProvenance("");
+    }
+
+    function test_OwnerCanWithdrawPrimaryMintProceeds() public {
+        vm.prank(buyer);
+        collection.mint{value: PRICE}("ipfs://piece-1");
+
+        uint256 beforeBalance = artist.balance;
+        collection.withdrawProceeds(payable(artist));
+
+        assertEq(artist.balance - beforeBalance, 0.975 ether);
+        assertEq(collection.proceedsBalance(), 0);
+    }
+
+    function test_RevertWhen_ProceedsRecipientIsZero() public {
+        vm.prank(buyer);
+        collection.mint{value: PRICE}("ipfs://piece-1");
+
+        vm.expectRevert(VectolithOriginalsV2.ZeroAddress.selector);
+        collection.withdrawProceeds(payable(address(0)));
+    }
+
+    function test_RevertWhen_NonOwnerWithdrawsProceeds() public {
+        vm.prank(buyer);
+        collection.mint{value: PRICE}("ipfs://piece-1");
+
+        vm.prank(buyer);
+        vm.expectRevert();
+        collection.withdrawProceeds(payable(buyer));
+    }
+
+    function test_RevertWhen_ProceedsRecipientRejectsEtherWithoutLosingAccounting() public {
+        vm.prank(buyer);
+        collection.mint{value: PRICE}("ipfs://piece-1");
+        RejectingTreasury rejectingRecipient = new RejectingTreasury();
+
+        vm.expectRevert(VectolithOriginalsV2.TransferFailed.selector);
+        collection.withdrawProceeds(payable(address(rejectingRecipient)));
+
+        assertEq(collection.proceedsBalance(), 0.975 ether);
     }
 
     function test_RoyaltyAndInterfaceRemainEip2981Compatible() public view {
