@@ -68,3 +68,8 @@ The Base V1 contracts are deployed and immutable. Keep their source and manifest
 ## V2 successor proposals
 
 `src/VectolithMarketplaceV2.sol` and `src/VectolithOriginalsV2.sol` are separate, non-deployed successor contracts. Their 26 adversarial tests are included in the full `forge test` suite. The marketplace suite covers royalty/fee settlement boundaries, malformed or reverting EIP-2981 interfaces, ERC-165 failures, safe NFT delivery to contract buyers and zero-address controls. The originals suite covers pull-payment accounting, treasury failure behavior, zero-address controls, sale/price/wallet gates, provenance immutability and royalty compatibility. See [`docs/marketplace-v2-security-hardening.md`](../docs/marketplace-v2-security-hardening.md). These contracts do not alter V1 or authorize deployment/migration.
+
+
+## V2 successor proposals
+
+`src/VectolithMarketplaceV2.sol` and `src/VectolithOriginalsV2.sol` are separate, non-deployed successor contracts. Their 26 adversarial tests are included in the full `forge test` suite. The marketplace suite covers royalty/fee settlement boundaries, malformed or reverting EIP-2981 interfaces, ERC-165 failures, safe NFT delivery to contract buyers and zero-address controls. The originals suite covers pull-payment accounting, treasury failure behavior, zero-address controls, sale/price/wallet gates, provenance immutability and royalty compatibility. See [`docs/marketplace-v2-security-hardening.md`](../docs/marketplace-v2-security-hardening.md). These contracts do not alter V1 or authorize deployment/migration.
