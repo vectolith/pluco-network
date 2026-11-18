@@ -36,6 +36,8 @@ jobs:
           version: stable
       - name: Run contract tests
         run: forge test --gas-report
+      - name: Validate deployment verifier syntax
+        run: bash -n scripts/verify-base-deployment.sh
       - name: Verify declared Base deployment through public RPC
         env:
           BASE_RPC_URL: https://mainnet.base.org
