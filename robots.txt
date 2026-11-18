@@ -1,5 +1,4 @@
 User-Agent: *
 Allow: /
 
-Host: https://ganiyucall911.github.io
-Sitemap: https://ganiyucall911.github.io/pluco/sitemap.xml
+Sitemap: https://ganiyucall911.github.io/vectolith/sitemap.xml

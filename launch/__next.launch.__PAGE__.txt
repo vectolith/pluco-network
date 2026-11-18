@@ -1,39 +1,57 @@
-2:"$Sreact.fragment"
-3:"/pluco/_next/static/chunks/2zg65-krgj2w1.js"
-4:"/pluco/_next/static/chunks/0v1-3-h_cvsnu.js"
-5:"/pluco/_next/static/chunks/38_289sli3gox.js"
-6:"/pluco/_next/static/chunks/40843ok-d8g3k.js"
-7:"/pluco/_next/static/chunks/0xr9b1tx1byq6.js"
-8:"/pluco/_next/static/chunks/0rz9kpl08_wb-.js"
-9:"/pluco/_next/static/chunks/19vwyqi3rclom.js"
-a:"/pluco/_next/static/chunks/3q7lsejq8y72x.js"
-b:"/pluco/_next/static/chunks/1r6h0_z77uz7u.js"
-c:"/pluco/_next/static/chunks/15qh2dgykm2lo.js"
-d:"/pluco/_next/static/chunks/3sczs439q2s-q.js"
-e:"/pluco/_next/static/chunks/28jy6s5mqopbq.js"
-f:I[39756,["$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"default"]
-10:I[37457,["$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"default"]
-14:I[47257,["$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"ClientPageRoot"]
-15:"/pluco/_next/static/chunks/2lgjadlskuw11.js"
-16:I[68113,["$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e","$15"],"default"]
-19:I[97367,["$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"OutletBoundary"]
-1a:"$Sreact.suspense"
-1d:"ViewportBoundary"
-1e:I[97367,["$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"$1d"]
-1f:"MetadataBoundary"
-20:I[97367,["$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"$1f"]
-21:I[27201,["$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"IconMark"]
-12:X
-13:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$2","c",{"children":[["$","$L14",null,{"Component":"$16","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@17","$@18"]}}],[["$","script","script-0",{"src":"/pluco/_next/static/chunks/2lgjadlskuw11.js","async":true}]],["$","$L19",null,{"children":["$","$1a",null,{"name":"Next.MetadataOutlet","children":"$@1b"}]}]]}],"p":"$@1c","v":null,"s":"$12"}}]]
-1:[["children",{"s":"launch","h":64,"d":{"r":["$","$2","c",{"children":[null,["$","$Lf",null,{"parallelRouterKey":"children","template":["$","$L10",null,{}]}]]}],"p":"$@11","v":null,"s":"$12"},"c":"$Q13"}]]
-0:{"t":{"t":{"s":"","h":20,"c":"$Q1"},"h":{"r":["$","$2","h",{"children":[null,["$","$L1e",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#f7f6f4","media":"(prefers-color-scheme: light)"}],["$","meta","3",{"name":"theme-color","content":"#0a0a0a","media":"(prefers-color-scheme: dark)"}]]}],["$","$L20",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1a",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Launch a collection | PLUCO"}],["$","meta","1",{"name":"description","content":"Launch a collection on PLUCO: register the contract, set royalties and publish on Base."}],["$","meta","2",{"name":"application-name","content":"PLUCO"}],["$","meta","3",{"name":"author","content":"PLUCO"}],["$","meta","4",{"name":"keywords","content":"NFT,Base,art market,mint,marketplace,ERC-721,onchain art"}],["$","meta","5",{"name":"creator","content":"PLUCO"}],["$","meta","6",{"name":"robots","content":"index, follow"}],["$","link","7",{"rel":"canonical","href":"https://ganiyucall911.github.io/pluco/launch/"}],["$","meta","8",{"property":"og:title","content":"Launch a collection | PLUCO"}],["$","meta","9",{"property":"og:description","content":"Launch a collection on PLUCO: register the contract, set royalties and publish on Base."}],["$","meta","10",{"property":"og:url","content":"https://ganiyucall911.github.io/pluco/launch/"}],["$","meta","11",{"property":"og:site_name","content":"PLUCO"}],["$","meta","12",{"property":"og:image","content":"https://ganiyucall911.github.io/pluco/og/pluco.png"}],["$","meta","13",{"property":"og:image:width","content":"1200"}],["$","meta","14",{"property":"og:image:height","content":"630"}],["$","meta","15",{"property":"og:image:alt","content":"PLUCO — an open art market on Base"}],["$","meta","16",{"property":"og:type","content":"website"}],["$","meta","17",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","18",{"name":"twitter:title","content":"Launch a collection | PLUCO"}],["$","meta","19",{"name":"twitter:description","content":"Launch a collection on PLUCO: register the contract, set royalties and publish on Base."}],["$","meta","20",{"name":"twitter:image","content":"https://ganiyucall911.github.io/pluco/og/pluco.png"}],["$","link","21",{"rel":"icon","href":"/pluco/favicon.ico?favicon.2g5vf9_6y8kt2.ico","sizes":"32x32","type":"image/x-icon"}],["$","link","22",{"rel":"icon","href":"/pluco/icon.png?icon.0varbope1oirj.png","sizes":"512x512","type":"image/png"}],["$","link","23",{"rel":"apple-touch-icon","href":"/pluco/apple-icon.png?apple-icon.3s9zxx9drej_1.png","sizes":"180x180","type":"image/png"}],["$","$L21","24",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@22","v":null,"s":"$12"}},"a":"$@23","u":"$@24","b":"ySscvtx9zBwgl69P0Yn8_"}
-17:{}
-18:"$13:0:1:d:r:props:children:0:props:serverProvidedParams:params"
-1b:null
-24:true
-12:300
-12:C
-23:0
-11:"$undefined"
-22:"$undefined"
-1c:"$undefined"
+1:"$Sreact.fragment"
+2:"/pluco-network/_next/static/chunks/36j7o60_qnni2.js"
+3:"/pluco-network/_next/static/chunks/3je7h38retwm7.js"
+4:"/pluco-network/_next/static/chunks/1cks1pufbvgdq.js"
+5:"/pluco-network/_next/static/chunks/2bc4x8wny_2je.js"
+6:"/pluco-network/_next/static/chunks/0m_45iwkvn8i8.js"
+7:"/pluco-network/_next/static/chunks/3i9t0ttfpavj1.js"
+8:"/pluco-network/_next/static/chunks/2i5o8fjf_iqck.js"
+9:"/pluco-network/_next/static/chunks/023b-w39qoyy-.js"
+a:"/pluco-network/_next/static/chunks/1yi12qf9adu4-.js"
+b:"/pluco-network/_next/static/chunks/1t1n2b4f6zyud.js"
+c:"/pluco-network/_next/static/chunks/1df3qohxoy7m9.js"
+d:"/pluco-network/_next/static/chunks/0e8kb9bmfjsi2.js"
+e:"/pluco-network/_next/static/chunks/3bf7h_0m2jbtk.js"
+f:I[437799,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"WalletProvider"]
+10:I[835259,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"MotionProvider"]
+11:I[663780,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"Navbar"]
+12:I[339756,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"default"]
+13:I[837457,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"default"]
+14:I[522016,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],""]
+15:I[605500,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"Image"]
+:HL["/pluco-network/_next/static/chunks/0wbq9tx4wldo5.css","style"]
+1c:X
+20:X
+20:C
+21:[["children",{"s":"__PAGE__","h":160,"d":{"r":"$L22","p":"$@23","v":null,"s":"$1c"}}]]
+1d:[["children",{"s":"launch","h":96,"d":{"r":"$L1e","p":"$@1f","v":"$20","s":"$1c"},"c":"$Q21"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/pluco-network/_next/static/chunks/0wbq9tx4wldo5.css","precedence":"next"}],["$","script","script-0",{"src":"/pluco-network/_next/static/chunks/36j7o60_qnni2.js","async":true}],["$","script","script-1",{"src":"/pluco-network/_next/static/chunks/3je7h38retwm7.js","async":true}],["$","script","script-2",{"src":"/pluco-network/_next/static/chunks/1cks1pufbvgdq.js","async":true}],["$","script","script-3",{"src":"/pluco-network/_next/static/chunks/2bc4x8wny_2je.js","async":true}],["$","script","script-4",{"src":"/pluco-network/_next/static/chunks/0m_45iwkvn8i8.js","async":true}],["$","script","script-5",{"src":"/pluco-network/_next/static/chunks/3i9t0ttfpavj1.js","async":true}],["$","script","script-6",{"src":"/pluco-network/_next/static/chunks/2i5o8fjf_iqck.js","async":true}],["$","script","script-7",{"src":"/pluco-network/_next/static/chunks/023b-w39qoyy-.js","async":true}],["$","script","script-8",{"src":"/pluco-network/_next/static/chunks/1yi12qf9adu4-.js","async":true}],["$","script","script-9",{"src":"/pluco-network/_next/static/chunks/1t1n2b4f6zyud.js","async":true}],["$","script","script-10",{"src":"/pluco-network/_next/static/chunks/1df3qohxoy7m9.js","async":true}],["$","script","script-11",{"src":"/pluco-network/_next/static/chunks/0e8kb9bmfjsi2.js","async":true}],["$","script","script-12",{"src":"/pluco-network/_next/static/chunks/3bf7h_0m2jbtk.js","async":true}]],["$","html",null,{"lang":"en","className":"RVeh7W_variable Ei2LAa_variable","children":["$","body",null,{"children":["$","$Lf",null,{"children":["$","$L10",null,{"children":[["$","$L11",null,{}],["$","$L12",null,{"parallelRouterKey":"children","template":["$","$L13",null,{}],"notFound":[["$","main",null,{"className":"grid min-h-[70vh] place-items-center px-6 pt-24 pb-24","children":["$","div",null,{"className":"text-center","children":[["$","p",null,{"className":"text-xs font-semibold uppercase tracking-[.3em] text-paper","children":"404"}],["$","h1",null,{"className":"mt-6 text-5xl font-semibold sm:text-7xl","children":"Nothing owned here."}],["$","p",null,{"className":"mx-auto mt-5 max-w-md text-base leading-7 text-body","children":"The page you were looking for isn't part of this collection."}],["$","$L14",null,{"href":"/","className":"focus-ring mt-9 inline-flex min-h-12 items-center rounded-full bg-paper px-6 text-sm font-semibold text-ink","children":"Back to home"}]]}]}],[]]}],["$","footer",null,{"className":"border-t border-line","children":[["$","div",null,{"className":"wrap flex flex-col items-center gap-6 pt-16 pb-12 text-center","children":[["$","$L14",null,{"href":"/","aria-label":"VECTOLITH home","className":"focus-ring flex items-center justify-center ","children":["$","$L15",null,{"src":"/pluco-network/brand/vectolith-white.png","alt":"VECTOLITH","width":2946,"height":1474,"priority":true,"style":{"filter":"var(--logo-filter)"},"className":"h-8 w-auto object-contain sm:h-9"}]}],["$","p",null,{"className":"max-w-[300px] text-[13px] leading-6 text-mute","children":"An open art protocol on Base. Anyone can register a collection, mint a piece or buy one."}]]}],["$","div",null,{"className":"wrap grid justify-items-center gap-10 pb-14 text-center sm:grid-cols-3 sm:justify-items-start sm:text-left","children":[["$","div","Market",{"className":"flex flex-col items-center sm:items-start","children":[["$","p",null,{"className":"eyebrow mb-4","children":"Market"}],["$","div",null,{"className":"grid gap-3 justify-items-center sm:justify-items-start","children":[["$","$L14","Marketplace",{"className":"text-[13px] text-body transition hover:text-paper","href":"/marketplace","children":"Marketplace"}],["$","$L14","Mint",{"className":"text-[13px] text-body transition hover:text-paper","href":"/mint","children":"Mint"}],["$","$L14","Sell",{"className":"text-[13px] text-body transition hover:text-paper","href":"/sell","children":"Sell"}]]}]]}],["$","div","Protocol",{"className":"flex flex-col items-center sm:items-start","children":[["$","p",null,{"className":"eyebrow mb-4","children":"Protocol"}],["$","div",null,{"className":"grid gap-3 justify-items-center sm:justify-items-start","children":[["$","$L14","Overview",{"className":"text-[13px] text-body transition hover:text-paper","href":"/protocol","children":"Overview"}],"$L16","$L17","$L18"]}]]}],"$L19"]}],"$L1a"]}]]}]}]}]}]]}],"p":"$@1b","v":null,"s":"$1c"},"c":"$Q1d"},"h":{"r":"$L24","p":"$@25","v":null,"s":"$1c"}},"a":"$@26","u":"$@27","b":"rbcPu2Wdi8gKmFVQPrdha"}
+28:I[347257,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"ClientPageRoot"]
+29:"/pluco-network/_next/static/chunks/1mo1qlbh80anl.js"
+2a:I[568113,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e","$29"],"default"]
+2d:I[897367,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"OutletBoundary"]
+2e:"$Sreact.suspense"
+30:"ViewportBoundary"
+31:I[897367,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"$30"]
+32:"MetadataBoundary"
+33:I[897367,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"$32"]
+34:I[27201,["$2","$3","$4","$5","$6","$7","$8","$9","$a","$b","$c","$d","$e"],"IconMark"]
+16:["$","$L14","Registry",{"className":"text-[13px] text-body transition hover:text-paper","href":"/protocol","children":"Registry"}]
+17:["$","$L14","Fees",{"className":"text-[13px] text-body transition hover:text-paper","href":"/protocol","children":"Fees"}]
+18:["$","$L14","Launch",{"className":"text-[13px] text-body transition hover:text-paper","href":"/launch","children":"Launch"}]
+19:["$","div","Company",{"className":"flex flex-col items-center sm:items-start","children":[["$","p",null,{"className":"eyebrow mb-4","children":"Company"}],["$","div",null,{"className":"grid gap-3 justify-items-center sm:justify-items-start","children":[["$","$L14","About",{"className":"text-[13px] text-body transition hover:text-paper","href":"/about","children":"About"}],["$","$L14","Verification",{"className":"text-[13px] text-body transition hover:text-paper","href":"/verification","children":"Verification"}],["$","$L14","Contact",{"className":"text-[13px] text-body transition hover:text-paper","href":"/contact","children":"Contact"}],["$","$L14","Legal",{"className":"text-[13px] text-body transition hover:text-paper","href":"/legal","children":"Legal"}]]}]]}]
+1a:["$","div",null,{"className":"wrap flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-line py-6 text-[11px] uppercase tracking-[.18em] text-faint","children":[["$","span",null,{"children":"© 2026 VECTOLITH"}],["$","span",null,{"children":"Base · Ethereum L2"}],["$","span",null,{"children":"Settlement in ETH"}]]}]
+1e:["$","$1","c",{"children":[null,["$","$L12",null,{"parallelRouterKey":"children","template":["$","$L13",null,{}]}]]}]
+22:["$","$1","c",{"children":[["$","$L28",null,{"Component":"$2a","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@2b","$@2c"]}}],[["$","script","script-0",{"src":"/pluco-network/_next/static/chunks/1mo1qlbh80anl.js","async":true}]],["$","$L2d",null,{"children":["$","$2e",null,{"name":"Next.MetadataOutlet","children":"$@2f"}]}]]}]
+24:["$","$1","h",{"children":[null,["$","$L31",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#f7f6f4","media":"(prefers-color-scheme: light)"}],["$","meta","3",{"name":"theme-color","content":"#0a0a0a","media":"(prefers-color-scheme: dark)"}]]}],["$","$L33",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$2e",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"VECTOLITH | Mint, buy and sell art on Base"}],["$","meta","1",{"name":"description","content":"An open art market on Base. Anyone can register a collection, mint a piece or buy one."}],["$","meta","2",{"name":"application-name","content":"VECTOLITH"}],["$","link","3",{"rel":"canonical","href":"https://ganiyucall911.github.io/vectolith/"}],["$","meta","4",{"property":"og:title","content":"VECTOLITH | Mint, buy and sell art on Base"}],["$","meta","5",{"property":"og:description","content":"An open art market on Base. Anyone can register a collection, mint a piece or buy one."}],["$","meta","6",{"property":"og:url","content":"https://ganiyucall911.github.io/vectolith/"}],["$","meta","7",{"property":"og:site_name","content":"VECTOLITH"}],["$","meta","8",{"property":"og:image","content":"https://ganiyucall911.github.io/vectolith/og/vectolith.png"}],["$","meta","9",{"property":"og:image:width","content":"1200"}],["$","meta","10",{"property":"og:image:height","content":"630"}],["$","meta","11",{"property":"og:image:alt","content":"VECTOLITH — an open art market on Base"}],["$","meta","12",{"property":"og:type","content":"website"}],["$","meta","13",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","14",{"name":"twitter:title","content":"VECTOLITH | Mint, buy and sell art on Base"}],["$","meta","15",{"name":"twitter:description","content":"An open art market on Base. Anyone can register a collection, mint a piece or buy one."}],["$","meta","16",{"name":"twitter:image","content":"https://ganiyucall911.github.io/vectolith/og/vectolith.png"}],["$","link","17",{"rel":"icon","href":"/pluco-network/favicon.ico?favicon.2g5vf9_6y8kt2.ico","sizes":"32x32","type":"image/x-icon"}],["$","link","18",{"rel":"icon","href":"/pluco-network/icon.png?icon.2-yq31nz9anv2.png","sizes":"512x512","type":"image/png"}],["$","link","19",{"rel":"icon","href":"/pluco-network/icon.svg?icon.434nmo_ivjcvs.svg","sizes":"any","type":"image/svg+xml"}],["$","link","20",{"rel":"apple-touch-icon","href":"/pluco-network/apple-icon.png?apple-icon.3s9zxx9drej_1.png","sizes":"180x180","type":"image/png"}],["$","$L34","21",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+2b:{}
+2c:"$22:props:children:0:props:serverProvidedParams:params"
+2f:null
+27:true
+1c:300
+1c:C
+26:0
+1f:"$undefined"
+25:"$undefined"
+23:"$undefined"
+1b:"$undefined"
