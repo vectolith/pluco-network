@@ -44,6 +44,12 @@ forge test --match-contract VectolithMarketplaceV2Test -vvv
 forge test
 ```
 
+## Originals V2 collection hardening
+
+`contracts/src/VectolithOriginalsV2.sol` is a separate successor proposal for the reference collection. It rejects zero treasury addresses, accrues primary-mint fees as pull credits rather than making an external call during mint, tracks the remaining primary proceeds for an owner-controlled withdrawal, and allows provenance to be committed only once. Treasury withdrawal failure cannot block minting, and failed owner-proceeds withdrawal leaves the proceeds accounting unchanged.
+
+`contracts/test/VectolithOriginalsV2.t.sol` covers treasury rejection without blocking mint, fee credits, owner proceeds withdrawal, zero-address controls, sale gates, exact price, per-wallet limits, provenance immutability, royalties and EIP-2981 compatibility.
+
 ## Deployment and migration gates
 
 Do not deploy V2 until all of the following are completed:
