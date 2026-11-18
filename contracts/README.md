@@ -1,8 +1,7 @@
 # VECTOLITH Art Protocol
 
 Open art protocol for Vectolith, designed for Base. Art is the first product surface;
-the wider network, wallet and indexer are separate roadmap components. Deployment
-status must be established from chain evidence, not repository configuration.
+the wider network, wallet and indexer are separate roadmap components. The deployment manifest is stored at `art/deployments/base.json`. It declares Base mainnet addresses and transaction hashes; independent chain verification is still required before calling the deployment verified.
 
 ## Contracts (`src/`)
 
@@ -25,7 +24,7 @@ Compiler: solc 0.8.26, evmVersion cancun, optimizer 200 runs.
 ## Deploy
 
 Base mainnet only (chain 8453). There is no testnet target in these scripts. This is
-a deployment procedure, not evidence that a deployment has occurred:
+a deployment procedure. The manifest records a claimed deployment; verify its transactions and deployed state independently before relying on it:
 
 ```bash
 PRIVATE_KEY=0x... node deploy-protocol.mjs --fee 250
