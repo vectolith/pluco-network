@@ -49,6 +49,15 @@ contract VectolithMarketplaceV2Test is Test {
         listingId = market.list(address(art), 1, LIST_PRICE);
     }
 
+    function test_DelistingDisablesPreviouslyCreatedListings() public {
+        uint256 listingId = _list();
+        registry.forceDelist(address(art));
+
+        vm.prank(buyer);
+        vm.expectRevert(VectolithMarketplaceV2.NotRegistered.selector);
+        market.buy{value: LIST_PRICE}(listingId);
+    }
+
     function test_100PercentRoyaltyIsCappedAfterProtocolFee() public {
         vm.prank(artist);
         art.setDefaultRoyalty(artist, 10_000);
