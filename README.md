@@ -8,6 +8,8 @@
 
 VECTOLITH is an open art market on Base: anyone can register a collection, mint a piece or buy one. This repository is the marketing site and product surface built with Next.js 16 (App Router), React 19, Tailwind CSS 4 and Framer Motion, exported as a fully static site.
 
+PLUCO Network is a standalone protocol and marketplace product. It owns its website, smart contracts, deployment configuration and release lifecycle. It does not require VaultETH or another Vectolith product; wallet access uses supported external wallet standards and remains user-selectable.
+
 ## Base contract configuration — deployment verification pending
 
 The site configuration targets Base mainnet (chain ID 8453) and currently contains
@@ -84,8 +86,8 @@ Wallet connection is read-only: it reports the address, network and balance. The
 ## Local development
 
 ```sh
-git clone https://github.com/vectolith/vectolith.git
-cd vectolith
+git clone https://github.com/vectolith/pluco-network.git
+cd pluco-network
 npm ci        # exact versions from package-lock.json
 npm run dev   # http://localhost:3000
 ```
@@ -93,13 +95,13 @@ npm run dev   # http://localhost:3000
 To preview with the same base path as production:
 
 ```sh
-NEXT_PUBLIC_BASE_PATH=/vectolith npm run dev
+NEXT_PUBLIC_BASE_PATH=/pluco-network npm run dev
 ```
 
 ## Build and export
 
 ```sh
-NEXT_PUBLIC_BASE_PATH=/vectolith npm run build   # prerenders every route into ./out
+NEXT_PUBLIC_BASE_PATH=/pluco-network npm run build   # prerenders every route into ./out
 npx serve out                                # serve the export locally
 ```
 
