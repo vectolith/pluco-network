@@ -8,6 +8,8 @@
 
 Vectolith products are built for use by their intended public audiences. They are not assumed to be private prototypes or internal-only tools. Public consumption does not, by itself, mean that a source repository, service endpoint, dataset, or operational system must be publicly exposed. Repository visibility and deployment exposure must be deliberate security decisions.
 
+Pluco is an independent digital-ownership protocol and marketplace. It owns its website, contracts, chain configuration, deployment records, registry, marketplace logic, treasury controls and release lifecycle. It must operate without another Vectolith product. Wallet connectivity uses supported external standards and remains optional; no Vectolith wallet or agent is required.
+
 This standard is a required engineering baseline, not a claim that the repository already satisfies every requirement. Compliance must be established through implementation, tests, and review.
 
 ## Required release gates
@@ -68,10 +70,10 @@ For repositories that train, evaluate, distribute, or serve models or AI feature
 - Clearly disclose model limitations and avoid unsupported claims about accuracy, safety, or capability.
 - Preserve raw evaluation evidence and dissenting results; do not select or suppress evidence solely to make a model appear better.
 
-### 8. Financial and dependency discipline
-- Prefer maintainable open standards and free/open-source dependencies where they meet the requirement.
-- Do not introduce paid APIs, infrastructure, trials, or services without explicit authorization.
-- Document operational dependencies, quotas, limits, and failure behavior. Never rely on quota circumvention.
+### 8. External dependency management
+- Identify external services, trust boundaries, data flows, quotas, limits, and failure behavior.
+- Use supported interfaces and documented contracts; do not rely on undocumented service behavior or quota circumvention.
+- Keep contract deployment verification, wallet connections and chain-specific integrations independently testable and replaceable.
 
 ## Repository-specific implementation
 
