@@ -113,6 +113,9 @@ contract VectolithMarketplaceV2 is Ownable, ReentrancyGuard {
         uint256 tokenId = listing.tokenId;
         uint256 price = listing.price;
 
+        // Registry delisting must also disable previously created listings.
+        if (!registry.isActive(collection)) revert NotRegistered();
+
         // Listings are non-custodial: the seller must still own the NFT.
         if (IERC721(collection).ownerOf(tokenId) != seller) revert NotOwnerOfToken();
 
