@@ -1,7 +1,8 @@
 # VECTOLITH Art Protocol
 
-Open art protocol for VECTOLITH, deployed on Base. Art is the first thing to run on the
-network, not the whole product: the chain, wallet and indexer come next.
+Open art protocol for Vectolith, designed for Base. Art is the first product surface;
+the wider network, wallet and indexer are separate roadmap components. Deployment
+status must be established from chain evidence, not repository configuration.
 
 ## Contracts (`src/`)
 
@@ -23,14 +24,15 @@ Compiler: solc 0.8.26, evmVersion cancun, optimizer 200 runs.
 
 ## Deploy
 
-Base mainnet only (chain 8453). There is no testnet target in these scripts:
+Base mainnet only (chain 8453). There is no testnet target in these scripts. This is
+a deployment procedure, not evidence that a deployment has occurred:
 
 ```bash
 PRIVATE_KEY=0x... node deploy-protocol.mjs --fee 250
 ```
 
-Mainnet gas is real ETH. Read the addresses the script prints back, then set them on the
-site before minting anything.
+Mainnet gas is real ETH. After deployment, verify the transaction and deployed bytecode,
+record the deployer and owner/admin roles, then set the verified addresses on the site.
 
 Fees are native ETH on Base and go to the treasury, which defaults to
 `0xcaEC37D3AdcE9a141BF5d78895cb3074Fae77AD9` in both deploy scripts. Set `TREASURY=0x...`
