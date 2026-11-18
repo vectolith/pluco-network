@@ -18,8 +18,15 @@ personal data from logs, screenshots, and requests.
 ## Scope
 
 Reports may cover authentication, authorization, cryptography, data exposure,
-tenant isolation, unsafe parsing, dependency vulnerabilities, build/release
-integrity, and deployment configuration in this repository.
+unsafe parsing, dependency vulnerabilities, build/release integrity, smart
+contracts, wallet interactions and deployment configuration in this repository.
+
+Pluco security review must cover contract ownership and privileged setters,
+treasury and royalty settlement, non-custodial transfer assumptions, chain-ID
+validation, transaction simulation, deployment-manifest integrity, verified
+source and deployed-bytecode matching. Never place wallet private keys or seed
+phrases in the application, build system, CI logs or support channels. A
+successful CI or RPC verification is not an independent contract audit.
 
 Do not test against third-party services, accounts, wallets, homeservers,
 production deployments, or other users' data without explicit authorization.
