@@ -32,7 +32,7 @@ the current status is **deployment declared; independent chain verification
 pending**. This README does not yet claim verified source, deployed-bytecode
 match, or current owner/treasury role confirmation.
 
-Before treating the deployment as fully verified, match deployed bytecode to the exact source commit and compiler settings, obtain verified-source status from the explorer, and complete an independent contract security review. Keep testnet, local-EVM and mainnet evidence distinct.
+Before treating the deployment as fully verified, obtain verified-source status from the explorer and complete an independent contract security review. Keep testnet, local-EVM and mainnet evidence distinct.
 
 `public/config.json` currently points the frontend at the configured addresses.
 That setting alone does not establish that live contract reads are valid.
