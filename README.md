@@ -58,7 +58,7 @@ the sale split always sums to the price. CI runs the Foundry suite and the publi
 
 ## Deployed V1 and successor proposals
 
-The configured Base contracts are the immutable V1 deployment. Keep the V1 source and deployment manifest aligned with the verified on-chain runtime; do not edit deployed V1 source in place. Security hardening and feature changes belong in separately versioned successor contracts. V2 marketplace and originals proposals are maintained separately and are not deployed or enabled by this repository's current frontend configuration. The V2 suite adds 10 marketplace cases and 16 originals cases for royalty/fee boundaries, malformed royalty interfaces, safe NFT delivery, zero-address controls, pull-payment accounting and provenance immutability.
+The configured Base contracts are the immutable V1 deployment. Keep the V1 source and deployment manifest aligned with the verified on-chain runtime; do not edit deployed V1 source in place. Security hardening and feature changes belong in separately versioned successor contracts. V2 marketplace and originals proposals are maintained separately and are not deployed or enabled by this repository's current frontend configuration. The V2 suite adds 10 marketplace cases and 16 originals cases for royalty/fee boundaries, malformed royalty interfaces, safe NFT delivery, zero-address controls, pull-payment accounting and provenance immutability. The V2 suite adds 10 marketplace cases and 16 originals cases for royalty/fee boundaries, malformed royalty interfaces, safe NFT delivery, zero-address controls, pull-payment accounting and provenance immutability.
 
 ## Project structure
 
