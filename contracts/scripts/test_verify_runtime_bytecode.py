@@ -28,7 +28,7 @@ class RuntimeBytecodeVerifierTests(unittest.TestCase):
             {"42": [{"start": 1, "length": 2}]},
             "test",
         )
-        self.assertEqual(masked, "60000000" + ("11" * 18))
+        self.assertEqual(masked, "600000" + ("11" * 19))
 
     def test_rejects_immutable_range_outside_runtime(self) -> None:
         with self.assertRaises(SystemExit):
