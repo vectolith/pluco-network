@@ -8,7 +8,7 @@
 
 VECTOLITH is an open art market on Base: anyone can register a collection, mint a piece or buy one. This repository is the marketing site and product surface built with Next.js 16 (App Router), React 19, Tailwind CSS 4 and Framer Motion, exported as a fully static site.
 
-## Base contract configuration — deployment verification pending
+## Base contract configuration — chain state verified; source review pending
 
 The site configuration targets Base mainnet (chain ID 8453) and currently contains
 these contract addresses:
@@ -23,9 +23,7 @@ The repository includes a deployment manifest at
 `contracts/art/deployments/base.json`. It records Base mainnet (chain ID 8453),
 the same three addresses shown above, an owner/treasury/royalty receiver, and
 transaction hashes for deployment, registration, minting, listing, purchase and
-withdrawal. The manifest is repository-supplied deployment evidence; it is not
-independent confirmation that each transaction succeeded or that current
-on-chain code and roles still match the manifest.
+withdrawal. The manifest is repository-supplied evidence. The Foundry CI workflow now independently checks all eight transaction receipts, verifies the three expected contract addresses and non-empty deployed bytecode, and reads current owner/treasury roles, marketplace registry, fee settings, supply, mint price, active registration and EIP-2981 royalty state from the public Base RPC. See [the passing contract verification run](https://github.com/vectolith/pluco-network/actions/runs/44292740465).
 
 The earlier reference to `contracts/deployments/base.json` was a path error;
 the actual manifest is under `contracts/art/deployments/base.json`. The
@@ -34,10 +32,7 @@ the current status is **deployment declared; independent chain verification
 pending**. This README does not yet claim verified source, deployed-bytecode
 match, or current owner/treasury role confirmation.
 
-Before treating the deployment as verified, confirm each manifest transaction
-on Base, read deployed bytecode and owner/admin/treasury roles from chain, match
-the bytecode to the exact source commit and compiler settings, and record
-verified-source status. Keep testnet, local-EVM and mainnet evidence distinct.
+Before treating the deployment as fully verified, match deployed bytecode to the exact source commit and compiler settings, obtain verified-source status from the explorer, and complete an independent contract security review. Keep testnet, local-EVM and mainnet evidence distinct.
 
 `public/config.json` currently points the frontend at the configured addresses.
 That setting alone does not establish that live contract reads are valid.
@@ -52,7 +47,7 @@ cd contracts && forge test
 
 They cover registration and impersonation rules, the 7.5% royalty and 2.5% fee split,
 non-custodial sale re-checks, pull-payment withdrawals, fee caps, and a fuzz test that
-the sale split always sums to the price. CI does not run them yet, see
+the sale split always sums to the price. CI runs the Foundry suite and the public-RPC deployment verification; see
 `docs/contracts-ci.md`.
 
 ## Project structure
