@@ -20,7 +20,7 @@ be `contracts`, where `foundry.toml` is located.
 The deployment verifier uses the public Base RPC at `https://mainnet.base.org`
 and requires no API key. It validates chain ID 8453, all eight manifest
 transaction receipts and their expected destinations/created addresses,
-non-empty deployed bytecode, current owner and treasury roles, marketplace
+executable runtime-bytecode matching against the current Foundry artifacts (compiler metadata and immutable constructor slots normalized), current owner and treasury roles, marketplace
 registry, configured fee rates, max supply, mint price, active collection
 registration, mint/list state, and EIP-2981 royalty receiver/rate.
 
