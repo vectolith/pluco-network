@@ -1,7 +1,8 @@
 # VECTOLITH Art Protocol
 
-Open art protocol for VECTOLITH, deployed on Base. Art is the first thing to run on the
-network, not the whole product: the chain, wallet and indexer come next.
+Contract source and tests for the VECTOLITH digital ownership and provenance product.
+
+**Deployment status: not verified.** The repository's root README explicitly treats the Base contract addresses in `public/config.json` as configuration values, not deployment proof. No canonical deployment record is currently present at the documented path. Do not describe these contracts as deployed, verified, or ready to handle user funds until the deployment evidence below has been independently checked.
 
 ## Contracts (`src/`)
 
@@ -21,33 +22,25 @@ npm run compile        # writes ABI + bytecode to ./artifacts
 
 Compiler: solc 0.8.26, evmVersion cancun, optimizer 200 runs.
 
-## Deploy
+## Deployment status and release gate
 
-Base mainnet only (chain 8453). There is no testnet target in these scripts:
+The deployment scripts target Base mainnet (chain ID 8453); they do not provide a testnet target. Mainnet deployment consumes real ETH for gas and must not be run under the current zero-budget constraint or without explicit authorization.
 
-```bash
-PRIVATE_KEY=0x... node deploy-protocol.mjs --fee 250
-```
+Before any deployment is represented as live, publish and independently verify a canonical deployment record containing:
 
-Mainnet gas is real ETH. Read the addresses the script prints back, then set them on the
-site before minting anything.
+- chain ID and network;
+- each contract address and deployment transaction hash;
+- deployer, owner/admin, and treasury addresses read back from chain;
+- source commit and compiler/settings;
+- verified source status and deployed-bytecode match;
+- initialization/configuration state and relevant role checks.
 
-Fees are native ETH on Base and go to the treasury, which defaults to
-`0xcaEC37D3AdcE9a141BF5d78895cb3074Fae77AD9` in both deploy scripts. Set `TREASURY=0x...`
-only to override it.
+Keep local, testnet, and mainnet evidence separate. Values in `public/config.json` or environment variables are not deployment evidence. Until the gate is complete, the public interface must treat onchain contract functionality as unavailable or unverified.
 
-Then deploy a collection if you want the reference one:
+## Fee and treasury configuration
 
-```bash
-PRIVATE_KEY=0x... node deploy.mjs --supply 100 --price 0.005 --per-wallet 3
-```
-
-The scripts print the addresses to set on the site:
-`NEXT_PUBLIC_VECTOLITH_REGISTRY`, `NEXT_PUBLIC_VECTOLITH_MARKETPLACE`,
-`NEXT_PUBLIC_VECTOLITH_ART_CONTRACT`, `NEXT_PUBLIC_VECTOLITH_CHAIN_ID`.
+Fees are native ETH on Base. The deployment scripts contain a default treasury address; review and explicitly authorize the treasury before any deployment. Never place a private key in the repository, CI logs, or public configuration.
 
 ## Why Base and not VECTOLITH chain yet
 
-VECTOLITH will be its own OP Stack L2, settling to Ethereum on the same spec Base uses.
-Until it has wallets, liquidity and an indexer, art minted there would be invisible.
-Base gives distribution today and the contracts are portable to VECTOLITH later, unchanged.
+VECTOLITH may later operate its own OP Stack L2, settling to Ethereum on a compatible specification. Until it has wallets, liquidity, and an indexer, deploying art there would make it difficult to discover and use. Base is the current target for a future authorized deployment; portability must be verified rather than assumed.
