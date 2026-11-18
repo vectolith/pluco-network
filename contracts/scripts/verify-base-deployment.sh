@@ -127,10 +127,10 @@ expect_equal "marketplace registry" "$marketplace_registry" "$registry"
 expect_equal "marketplace treasury" "$marketplace_treasury" "$treasury"
 expect_equal "originals treasury" "$originals_treasury" "$treasury"
 
-marketplace_fee="$(cast call "$marketplace" "feeBps()(uint96)" --rpc-url "$BASE_RPC_URL")"
-originals_fee="$(cast call "$originals" "feeBps()(uint96)" --rpc-url "$BASE_RPC_URL")"
-max_supply="$(cast call "$originals" "maxSupply()(uint256)" --rpc-url "$BASE_RPC_URL")"
-mint_price="$(cast call "$originals" "mintPrice()(uint256)" --rpc-url "$BASE_RPC_URL")"
+marketplace_fee="$(cast call "$marketplace" "feeBps()(uint96)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
+originals_fee="$(cast call "$originals" "feeBps()(uint96)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
+max_supply="$(cast call "$originals" "maxSupply()(uint256)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
+mint_price="$(cast call "$originals" "mintPrice()(uint256)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
 expected_marketplace_fee="$(manifest_value '.settings.marketplaceFeeBps')"
 expected_mint_fee="$(manifest_value '.settings.mintFeeBps')"
 expected_max_supply="$(manifest_value '.settings.maxSupply')"
@@ -164,8 +164,8 @@ if ! grep -q "750" <<<"$royalty_info"; then
 fi
 
 registry_active="$(cast call "$registry" "isActive(address)(bool)" "$originals" --rpc-url "$BASE_RPC_URL")"
-total_minted="$(cast call "$originals" "totalMinted()(uint256)" --rpc-url "$BASE_RPC_URL")"
-listing_count="$(cast call "$marketplace" "listingCount()(uint256)" --rpc-url "$BASE_RPC_URL")"
+total_minted="$(cast call "$originals" "totalMinted()(uint256)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
+listing_count="$(cast call "$marketplace" "listingCount()(uint256)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
 [[ "$registry_active" == "true" ]] || {
   echo "The Originals collection is not active in the registry." >&2
   exit 1
