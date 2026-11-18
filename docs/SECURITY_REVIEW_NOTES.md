@@ -66,8 +66,8 @@ When a collection does not expose `owner()`, any caller may register it and beco
 
 ## Review evidence
 
-- Foundry tests and Base public-RPC verification: [run 44294504204](https://github.com/vectolith/pluco-network/actions/runs/44294504204)
-- Build check: [run 44294504200](https://github.com/vectolith/pluco-network/actions/runs/44294504200)
+- Foundry tests and Base public-RPC verification: [run 44363495200](https://github.com/vectolith/pluco-network/actions/runs/44363495200)
+- Build check: [run 44363495170](https://github.com/vectolith/pluco-network/actions/runs/44363495170)
 - Deployment verifier: `contracts/scripts/verify-base-deployment.sh`
 - Runtime comparison: `contracts/scripts/verify-runtime-bytecode.py`
 
