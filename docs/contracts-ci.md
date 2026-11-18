@@ -32,3 +32,6 @@ ready. An independent contract security review remains required.
 
 
 The verifier is scoped to the deployed V1 contract names and addresses. Successor V2 contracts are not deployed or included in the V1 manifest. Do not change V1 source files without a separately reviewed deployment/versioning decision; the verifier must fail if local V1 artifacts diverge from deployed runtime bytecode.
+
+
+The Foundry test command includes both the 65 V1 regression tests and the 26 V2 successor tests. The Base RPC verifier remains scoped to the immutable V1 addresses and artifacts; it does not claim that V2 is deployed. The workflow must continue to fail if a V1 source change makes its normalized runtime diverge from Base.
