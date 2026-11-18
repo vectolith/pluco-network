@@ -63,3 +63,8 @@ Base gives distribution today and the contracts are portable to VECTOLITH later,
 ## Immutable V1 and successor contracts
 
 The Base V1 contracts are deployed and immutable. Keep their source and manifest aligned with the verified deployment. Do not patch V1 source in place to simulate a live upgrade. Any security remediation or feature change must be introduced as a separately named successor contract with its own tests, deployment plan, migration controls and explicit release approval. The proposed V2 contracts are separate, not deployed, and must not be represented as active until independently verified.
+
+
+## V2 successor proposals
+
+`src/VectolithMarketplaceV2.sol` and `src/VectolithOriginalsV2.sol` are separate, non-deployed successor contracts. Their 26 adversarial tests are included in the full `forge test` suite. The marketplace suite covers royalty/fee settlement boundaries, malformed or reverting EIP-2981 interfaces, ERC-165 failures, safe NFT delivery to contract buyers and zero-address controls. The originals suite covers pull-payment accounting, treasury failure behavior, zero-address controls, sale/price/wallet gates, provenance immutability and royalty compatibility. See [`docs/marketplace-v2-security-hardening.md`](../docs/marketplace-v2-security-hardening.md). These contracts do not alter V1 or authorize deployment/migration.
