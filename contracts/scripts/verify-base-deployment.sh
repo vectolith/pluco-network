@@ -13,6 +13,10 @@ if ! command -v cast >/dev/null 2>&1; then
   echo "Foundry cast is required for deployment verification." >&2
   exit 1
 fi
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "Python 3 is required for runtime bytecode verification." >&2
+  exit 1
+fi
 
 rpc() {
   local method="$1"
@@ -104,14 +108,26 @@ verify_transaction "list" "$(manifest_value '.transactions.list')" "$marketplace
 verify_transaction "buy" "$(manifest_value '.transactions.buy')" "$marketplace"
 verify_transaction "withdraw" "$(manifest_value '.transactions.withdraw')" "$marketplace"
 
-for address in "$registry" "$originals" "$marketplace"; do
+verify_runtime_bytecode() {
+  local label="$1"
+  local address="$2"
+  local artifact="$3"
+  local code
   code="$(rpc eth_getCode "[\"$address\",\"latest\"]" | tr -d '"')"
   if [[ "$code" == "0x" || "$code" == "0x0" ]]; then
     echo "No deployed bytecode at $address" >&2
     exit 1
   fi
-  echo "Verified deployed bytecode at $address"
-done
+  python3 "$ROOT_DIR/contracts/scripts/verify-runtime-bytecode.py" \
+    "$artifact" "$code" "$label"
+}
+
+verify_runtime_bytecode "registry" "$registry" \
+  "$ROOT_DIR/contracts/out/VectolithRegistry.sol/VectolithRegistry.json"
+verify_runtime_bytecode "originals" "$originals" \
+  "$ROOT_DIR/contracts/out/VectolithOriginals.sol/VectolithOriginals.json"
+verify_runtime_bytecode "marketplace" "$marketplace" \
+  "$ROOT_DIR/contracts/out/VectolithMarketplace.sol/VectolithMarketplace.json"
 
 registry_owner="$(cast call "$registry" "owner()(address)" --rpc-url "$BASE_RPC_URL")"
 originals_owner="$(cast call "$originals" "owner()(address)" --rpc-url "$BASE_RPC_URL")"
@@ -129,7 +145,7 @@ expect_equal "originals treasury" "$originals_treasury" "$treasury"
 
 marketplace_fee="$(cast call "$marketplace" "feeBps()(uint96)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
 originals_fee="$(cast call "$originals" "feeBps()(uint96)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
-max_supply="$(cast call "$originals" "maxSupply()(uint256)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
+max_supply="$(cast call "$originals" "maxSupply()(uint256)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"\nmax_per_wallet="$(cast call "$originals" "maxPerWallet()(uint256)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
 mint_price="$(cast call "$originals" "mintPrice()(uint256)" --rpc-url "$BASE_RPC_URL" | awk '{print $1}')"
 expected_marketplace_fee="$(manifest_value '.settings.marketplaceFeeBps')"
 expected_mint_fee="$(manifest_value '.settings.mintFeeBps')"
@@ -148,6 +164,11 @@ expected_mint_price="$(cast to-wei "$(manifest_value '.settings.mintPriceEth')" 
   echo "Maximum supply mismatch: expected $expected_max_supply, received $max_supply" >&2
   exit 1
 }
+if (( max_per_wallet < 1 || max_per_wallet > max_supply )); then
+  echo "Invalid maximum-per-wallet setting: $max_per_wallet (max supply: $max_supply)" >&2
+  exit 1
+fi
+echo "Observed maxPerWallet: $max_per_wallet"
 [[ "$mint_price" == "$expected_mint_price" ]] || {
   echo "Mint price mismatch: expected $expected_mint_price, received $mint_price" >&2
   exit 1
