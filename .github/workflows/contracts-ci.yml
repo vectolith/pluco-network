@@ -10,6 +10,7 @@ on:
   pull_request:
     paths:
       - "contracts/**"
+      - "docs/SECURITY_REVIEW_NOTES.md"
       - ".github/workflows/contracts-ci.yml"
 
 permissions:
