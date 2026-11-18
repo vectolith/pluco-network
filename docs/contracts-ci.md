@@ -1,35 +1,31 @@
-# Running the contract tests in CI
+# Contract and deployment verification
 
-The repository has 65 Foundry tests but CI does not run them yet: `ganiyucall911` has
-OAuth App access restrictions, so workflow files cannot be updated by tooling and the
-change has to land through the GitHub UI or a token with `workflow` scope.
+The repository's Foundry suite and Base deployment verifier run in GitHub Actions
+through [`.github/workflows/contracts.yml`](../.github/workflows/contracts.yml).
 
-Add this job to `.github/workflows/build.yml` (or drop it in as its own
-`.github/workflows/contracts.yml`):
+The workflow runs when contract sources, tests, configuration, deployment
+manifest, verifier script, or the workflow itself change on a pull request or on
+`main`. It checks out recursive submodules, installs the stable Foundry
+toolchain, and executes:
 
-```yaml
-  contracts:
-    name: Contract tests
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: contracts
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive # forge-std and openzeppelin-contracts are submodules
-      - uses: foundry-rs/foundry-toolchain@v1
-        with:
-          version: stable
-      - name: forge test
-        run: forge test --gas-report
+```bash
+cd contracts && forge test --gas-report
+bash scripts/verify-base-deployment.sh
 ```
 
-Two details that will bite if they are missed:
+The recursive checkout is required because `lib/forge-std` and
+`lib/openzeppelin-contracts` are Git submodules. The working directory must
+be `contracts`, where `foundry.toml` is located.
 
-- `submodules: recursive` is required. Both `lib/forge-std` and
-  `lib/openzeppelin-contracts` are git submodules, and a plain checkout leaves them empty.
-- `working-directory: contracts` matters. `foundry.toml` lives there, so running
-  `forge test` from the repository root finds no project.
+The deployment verifier uses the public Base RPC at `https://mainnet.base.org`
+and requires no API key. It validates chain ID 8453, all eight manifest
+transaction receipts and their expected destinations/created addresses,
+executable runtime-bytecode matching against the current Foundry artifacts (compiler metadata and immutable constructor slots normalized), current owner and treasury roles, marketplace
+registry, configured fee rates, max supply, mint price, active collection
+registration, mint/list state, and EIP-2981 royalty receiver/rate.
 
-Locally the same command is `cd contracts && forge test`.
+A successful run establishes that those on-chain checks matched the manifest
+at the checked block state. It does not establish that deployed bytecode matches
+the exact repository source/compiler output, that explorer source verification
+is complete, that the contracts are secure, or that the product is production
+ready. An independent contract security review remains required.
