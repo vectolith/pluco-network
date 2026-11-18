@@ -8,20 +8,34 @@
 
 VECTOLITH is an open art market on Base: anyone can register a collection, mint a piece or buy one. This repository is the marketing site and product surface built with Next.js 16 (App Router), React 19, Tailwind CSS 4 and Framer Motion, exported as a fully static site.
 
-## Live contracts
+## Base contract configuration — deployment verification pending
 
-Base mainnet, deployed 2026-11-08. Owner, treasury and royalty receiver are
-`0xcaEC37D3AdcE9a141BF5d78895cb3074Fae77AD9`.
+The site configuration targets Base mainnet (chain ID 8453) and currently contains
+these contract addresses:
 
-| Contract | Address |
+| Contract | Configured address |
 | --- | --- |
 | VectolithRegistry | `0x9218b355bb2e69a0f53e072c697e74e1ad63f9ff` |
 | VectolithOriginals | `0x1f49c091da217f73493a5b517f490865dbabe15d` |
 | VectolithMarketplace | `0x0bbdc74bd7144a32f29196753fd7727995df8e3c` |
 
-`public/config.json` points at them, so the gallery and marketplace read live chain
-state. Every hash from the deploy through the first settlement is in
-`contracts/deployments/base.json`.
+These are configuration values, not deployment proof. The previous deployment
+claim cannot currently be reconciled with the later statement in this README
+that no Vectolith contracts are deployed. The referenced
+`contracts/deployments/base.json` file is not present at that path in the
+repository, and independent chain verification was unavailable during this
+review. Therefore this README does not currently assert that these addresses
+contain the expected contracts, that source is verified, or that ownership and
+treasury roles match the intended configuration.
+
+Before describing the contracts as live, add the canonical deployment evidence:
+chain ID, address, deployment transaction hash, deployer, owner/admin and
+treasury addresses read from chain, source commit, compiler settings, verified
+source status, and deployed-bytecode match. Keep testnet, local-EVM and mainnet
+evidence distinct.
+
+`public/config.json` currently points the frontend at the configured addresses.
+That setting alone does not establish that live contract reads are valid.
 
 ## Tests
 
@@ -60,7 +74,7 @@ Foundry is the canonical way to compile, test and deploy; the node scripts in
 - Editorial pages: collections, creators, marketplace, explore, mint, sell, protocol, verification, dashboard, community, brand, about, contact, legal
 - SEO: per-page titles, Open Graph and Twitter metadata, canonical URLs, `sitemap.xml` and `robots.txt`
 
-Wallet connection is read-only: it reports the address, network and balance. No VECTOLITH contracts are deployed yet, so nothing on this site transfers funds.
+Wallet connection is read-only: it reports the address, network and balance. The frontend does not currently provide verified evidence that the configured Vectolith contracts are deployed or that this site can settle transfers.
 
 ## Requirements
 
