@@ -1,7 +1,7 @@
 # Contract and deployment verification
 
 The repository's Foundry suite and Base deployment verifier run in GitHub Actions
-through [`.github/workflows/contracts.yml`](../.github/workflows/contracts.yml).
+through [`.github/workflows/contracts-ci.yml`](../.github/workflows/contracts-ci.yml).
 
 The workflow runs when contract sources, tests, configuration, deployment
 manifest, verifier script, or the workflow itself change on a pull request or on
@@ -29,3 +29,6 @@ at the checked block state. It does not establish that deployed bytecode matches
 the exact repository source/compiler output, that explorer source verification
 is complete, that the contracts are secure, or that the product is production
 ready. An independent contract security review remains required.
+
+
+The verifier is scoped to the deployed V1 contract names and addresses. Successor V2 contracts are not deployed or included in the V1 manifest. Do not change V1 source files without a separately reviewed deployment/versioning decision; the verifier must fail if local V1 artifacts diverge from deployed runtime bytecode.
