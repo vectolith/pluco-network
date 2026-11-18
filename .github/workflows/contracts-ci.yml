@@ -40,9 +40,12 @@ jobs:
       - name: Validate deployment verifier syntax
         working-directory: contracts
         run: bash -n scripts/verify-base-deployment.sh
+      - name: Test runtime bytecode verifier
+        working-directory: contracts
+        run: python3 -m unittest discover -s scripts -p 'test_*.py'
       - name: Validate runtime verifier syntax
         working-directory: contracts
-        run: python3 -m py_compile scripts/verify-runtime-bytecode.py
+        run: python3 -m py_compile scripts/verify-runtime-bytecode.py scripts/test_verify_runtime_bytecode.py
       - name: Verify declared Base deployment through public RPC
         working-directory: contracts
         env:
