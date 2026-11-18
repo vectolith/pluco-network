@@ -1,7 +1,7 @@
 # VECTOLITH Art Protocol
 
 Open art protocol for Vectolith, designed for Base. Art is the first product surface;
-the wider network, wallet and indexer are separate roadmap components. The deployment manifest is stored at `art/deployments/base.json`. It declares Base mainnet addresses and transaction hashes; independent chain verification is still required before calling the deployment verified.
+the wider network, wallet and indexer are separate roadmap components. The deployment manifest is stored at `art/deployments/base.json`. CI now verifies its Base mainnet transaction receipts, deployed bytecode, ownership and treasury state, fee settings, supply, mint price, registry status and EIP-2981 royalty configuration through the public Base RPC. Verified-source matching and an independent contract security review remain outstanding.
 
 ## Contracts (`src/`)
 
@@ -46,6 +46,12 @@ PRIVATE_KEY=0x... node deploy.mjs --supply 100 --price 0.005 --per-wallet 3
 The scripts print the addresses to set on the site:
 `NEXT_PUBLIC_VECTOLITH_REGISTRY`, `NEXT_PUBLIC_VECTOLITH_MARKETPLACE`,
 `NEXT_PUBLIC_VECTOLITH_ART_CONTRACT`, `NEXT_PUBLIC_VECTOLITH_CHAIN_ID`.
+
+## Verify the declared Base deployment
+
+Run `bash scripts/verify-base-deployment.sh` from this directory. The script uses the public Base RPC (`https://mainnet.base.org`) without an API key. It checks the eight manifest transactions, expected contract addresses, non-empty deployed bytecode, owner and treasury roles, marketplace registry, configured fees, supply, mint price, active collection registration, mint/list state and the EIP-2981 royalty receiver/rate. The GitHub Actions contract workflow runs this after the Foundry test suite.
+
+These checks confirm current chain state against the manifest. They do not prove that deployed bytecode matches this repository's exact source commit/compiler output, and they are not a substitute for an independent security audit.
 
 ## Why Base and not VECTOLITH chain yet
 
