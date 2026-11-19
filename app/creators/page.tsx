@@ -28,8 +28,8 @@ export default function CreatorsPage() {
               <div className="grid md:grid-cols-[380px_1fr]">
                       <div className="flex aspect-square items-center justify-center border-b border-line bg-[#0a0a0a] md:aspect-auto md:min-h-[380px] md:border-b-0 md:border-r">
                       <Image
-                        src={asset("/brand/vectolith-white.png")}
-                        alt="VECTOLITH creator picture"
+                            src={asset("/brand/pluco-white.png")}
+                            alt="PLUCO creator picture"
                         width={2946}
                         height={1474}
                         className="h-auto w-[64%] max-w-[220px] object-contain"
