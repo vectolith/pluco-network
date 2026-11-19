@@ -61,8 +61,8 @@ export default function HomePage() {
           <div>
             <Reveal>
               <Image
-                src={asset("/brand/vectolith-white.png")}
-                alt="VECTOLITH"
+                    src={asset("/brand/pluco-white.png")}
+                    alt="PLUCO"
                 width={1200}
                 height={600}
                 priority

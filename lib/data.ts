@@ -8,5 +8,5 @@ export const collections:Collection[]=[
 {slug:"arcadian-pass",name:"Arcadian Pass",creator:"Arcadian Guild",category:"Membership",description:"A cultural membership built around access and participation.",members:"Demo · 5.0K members",accent:"from-white/[.14] via-white/[.06] to-ink"},
 {slug:"monoliths",name:"Monoliths",creator:"K. Obsidian",category:"Generative",description:"Algorithmic monuments shaped by rarity and restraint.",members:"Demo · 1.4K members",accent:"from-white/[.12] via-[#101010] to-ink"}
 ];
-export const creators=[{name:"VECTOLITH",role:"Digital artist · Base",works:"Creator profile",accent:"from-white/25 to-ink",image:"/brand/vectolith-white.png",href:"https://opensea.io/vectolith"}];
+export const creators=[{name:"PLUCO",role:"Digital artist · Base",works:"Creator profile",accent:"from-white/25 to-ink",image:"/brand/pluco-white.png",href:"https://opensea.io/pluco"}];
 export const communities=[{name:"The Emerald Room",meta:"Demo community",copy:"Private conversations, studio notes and holder-only gatherings."},{name:"Archive Walkers",meta:"Demo community",copy:"A collective exploring digital memory and imagined cities."},{name:"Atelier Circle",meta:"Demo community",copy:"Fashion, identity and collaborative collector experiences."}];

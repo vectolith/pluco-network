@@ -19,12 +19,12 @@ export function Logo({
   return (
     <Link
       href="/"
-      aria-label="VECTOLITH home"
+          aria-label="PLUCO home"
       className={`focus-ring flex items-center justify-center ${className}`}
     >
       <Image
-        src={asset("/brand/vectolith-white.png")}
-        alt="VECTOLITH"
+            src={asset("/brand/pluco-white.png")}
+            alt="PLUCO"
         width={2946}
         height={1474}
         priority
