@@ -86,9 +86,9 @@ export default function LaunchPage() {
       .catch(() => setArtifact(null));
   }, []);
 
-  useEffect(() => {
-    if (account && !royalty) setRoyalty(account);
-  }, [account, royalty]);
+  // Derived rather than mirrored into state: an empty field means "use my own
+  // wallet", which follows the connected account without a render loop.
+  const royaltyAddress = royalty || account || "";
 
   const preview = useMemo(() => {
     try {
@@ -148,7 +148,7 @@ export default function LaunchPage() {
     if (!Number.isInteger(supplyNum) || supplyNum < 1 || supplyNum > 100000)
       return setStatus("Supply must be a whole number between 1 and 100000.");
     if (perWalletNum < 0 || perWalletNum > supplyNum) return setStatus("Per-wallet limit must be between 0 and the supply.");
-    if (!isAddress(royalty)) return setStatus("Royalty receiver must be a valid address.");
+    if (!isAddress(royaltyAddress)) return setStatus("Royalty receiver must be a valid address.");
     if (!isAddress(treasury)) return setStatus("Treasury must be a valid address.");
     if (!Number.isInteger(fee) || fee < 0 || fee > 1000) return setStatus("Mint fee must be 0–1000 basis points (10% max).");
 
@@ -166,7 +166,7 @@ export default function LaunchPage() {
           priceWei: preview,
           perWallet: perWalletNum,
           owner: account,
-          royalty,
+          royalty: royaltyAddress,
           treasury,
           feeBps: fee,
         });
@@ -281,7 +281,7 @@ export default function LaunchPage() {
               <label className="block sm:col-span-2">
                 <span className="text-xs text-body">Royalty receiver</span>
                 <input
-                  value={royalty}
+                  value={royaltyAddress}
                   onChange={(e) => setRoyalty(e.target.value)}
                   placeholder="defaults to your wallet"
                   className="focus-ring mt-2 w-full rounded-lg border border-line bg-ink px-3 py-2 font-mono text-xs text-paper"

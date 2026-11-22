@@ -131,8 +131,11 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // AppKit restores its own WalletConnect session on reload.
+  // AppKit restores its own WalletConnect session on reload. This is a sync from
+  // an external system into React, which is exactly what effects are for, so the
+  // synchronous setState calls here are intentional.
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     if (typeof window === "undefined" || !reownConfigured()) return;
     if (localStorage.getItem(NAME_KEY) !== REOWN_NAME) return;
     const restored = restoreAnyReown();
@@ -148,6 +151,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
         void readChain(eth);
       }
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [attach, readChain]);
 
   const switchChain = useCallback(async (target: number) => {

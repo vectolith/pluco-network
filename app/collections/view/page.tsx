@@ -22,17 +22,17 @@ import { isAddress } from "@/lib/chain-config";
 function View() {
   const params = useSearchParams();
   const address = (params.get("address") || "").trim();
+  // A malformed address is derived during render instead of being pushed into
+  // state from the effect, so the effect only ever runs for readable input.
+  const invalid = Boolean(address) && !isAddress(address);
   const [state, setState] = useState<{ loading: boolean; data: ChainCollectionDetail | null; error: string | null }>({
-    loading: Boolean(address),
+    loading: Boolean(address) && !invalid,
     data: null,
     error: null,
   });
 
   useEffect(() => {
-    if (!address || !isAddress(address)) {
-      setState({ loading: false, data: null, error: address ? "That is not a valid contract address." : null });
-      return;
-    }
+    if (!address || invalid) return;
     let live = true;
     readCollectionDetail(address).then((result) => {
       if (!live) return;
@@ -41,7 +41,11 @@ function View() {
     return () => {
       live = false;
     };
-  }, [address]);
+  }, [address, invalid]);
+
+  if (invalid) {
+    return <p className="text-sm leading-6 text-gold">That is not a valid contract address.</p>;
+  }
 
   if (state.loading) {
     return (

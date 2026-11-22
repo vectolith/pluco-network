@@ -63,7 +63,10 @@ export default function MintPage() {
   }, [provider, contract]);
 
   useEffect(() => {
-    readChain();
+    // Deferred by one tick so the chain read never commits state synchronously
+    // inside the effect body; cancelled if the wallet or contract changes first.
+    const id = window.setTimeout(() => void readChain(), 0);
+    return () => window.clearTimeout(id);
   }, [readChain]);
 
   async function mint() {

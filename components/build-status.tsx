@@ -25,8 +25,8 @@ type State =
   | { kind: "private"; checkedAt: number }
   | { kind: "error"; message: string; checkedAt: number };
 
-function ago(iso: string) {
-  const s = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 1000));
+function ago(iso: string, now: number) {
+  const s = Math.max(0, Math.round((now - new Date(iso).getTime()) / 1000));
   if (s < 60) return s + "s ago";
   if (s < 3600) return Math.round(s / 60) + "m ago";
   if (s < 86400) return Math.round(s / 3600) + "h ago";
@@ -50,7 +50,9 @@ function label(run: Run | null) {
 
 export function BuildStatus() {
   const [state, setState] = useState<State>({ kind: "loading" });
-  const [, setTick] = useState(0);
+  // The clock is state rather than a render-time Date.now() read, so the
+  // relative timestamps refresh on a timer instead of during an impure render.
+  const [now, setNow] = useState<number | null>(null);
   const busy = useRef(false);
 
   const load = useCallback(async () => {
@@ -76,13 +78,19 @@ export function BuildStatus() {
   }, []);
 
   useEffect(() => {
-    load();
+    // Deferred by a tick so the first read never commits state synchronously
+    // inside the effect body.
+    const kick = window.setTimeout(() => {
+      setNow(Date.now());
+      void load();
+    }, 0);
     const poll = setInterval(load, POLL_MS);
     const onVisible = () => document.visibilityState === "visible" && load();
     document.addEventListener("visibilitychange", onVisible);
     window.addEventListener("focus", load);
-    const clock = setInterval(() => setTick((t) => t + 1), 1000);
+    const clock = setInterval(() => setNow(Date.now()), 1000);
     return () => {
+      clearTimeout(kick);
       clearInterval(poll);
       clearInterval(clock);
       document.removeEventListener("visibilitychange", onVisible);
@@ -95,7 +103,8 @@ export function BuildStatus() {
   const statusText = state.kind === "loading" ? "Checking" : state.kind === "private" ? "Unavailable" : state.kind === "error" ? "Unreachable" : tag.text;
   const statusKey = state.kind === "ok" ? tag.key : "none";
   const checked = state.kind === "loading" ? null : state.checkedAt;
-  const stale = run ? Date.now() - new Date(run.updated_at).getTime() > STALE_MS : false;
+  const stale = run && now !== null ? now - new Date(run.updated_at).getTime() > STALE_MS : false;
+  const updated = run ? (now === null ? "…" : ago(run.updated_at, now)) : null;
 
   return (
     <div className="rounded-none border border-line bg-paper/[.06] p-8">
@@ -126,7 +135,7 @@ export function BuildStatus() {
             <>
               <p className="text-paper">{run.display_title}</p>
               <p className="mt-1">
-                <span className="font-mono text-xs">{run.head_sha.slice(0, 7)}</span> · {run.head_branch} · updated {ago(run.updated_at)}
+                <span className="font-mono text-xs">{run.head_sha.slice(0, 7)}</span> · {run.head_branch} · updated {updated}
                 {run.html_url ? (
                   <>
                     {" · "}

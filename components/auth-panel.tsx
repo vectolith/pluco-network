@@ -58,7 +58,11 @@ export function AuthPanel() {
   const [copied, setCopied] = useState(false);
 
   // After a connection: new address = account created, known address = welcome back.
+  // This has to stay in an effect: it reads localStorage and then writes the
+  // "seen" marker, so deriving it during render would flip the message on the
+  // very next re-render.
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     if (!account) {
       setJustCreated(false);
       return;
@@ -70,6 +74,7 @@ export function AuthPanel() {
     } catch {
       /* storage blocked */
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [account]);
 
   useEffect(() => {
